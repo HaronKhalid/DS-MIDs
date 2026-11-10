@@ -1,0 +1,42 @@
+/* Data Science additions: charts, labs, code judge */
+.chartbox{margin:12px 0}
+svg.chart{width:100%;height:auto;display:block;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:12px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:6px 4px 0;font-size:.85rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.chart-slot{margin:8px 0}
+
+/* confusion matrix grid */
+.cm{display:grid;grid-template-columns:90px 1fr 1fr;gap:6px;max-width:420px;margin:12px 0}
+.cm-h{display:flex;align-items:center;justify-content:center;text-align:center;font-size:.8rem;font-weight:700;color:var(--muted);line-height:1.2}
+.cm-cell{border-radius:12px;padding:12px 6px;text-align:center;border:2px solid var(--line);display:flex;flex-direction:column;gap:2px}
+.cm-cell b{font-size:1.5rem;line-height:1.1}
+.cm-cell small{font-size:.75rem;color:var(--muted)}
+.cm-cell.good{background:var(--ok-soft);border-color:var(--ok)}
+.cm-cell.good b{color:var(--ok)}
+.cm-cell.bad{background:var(--bad-soft);border-color:var(--bad)}
+.cm-cell.bad b{color:var(--bad)}
+
+/* labs */
+.lab-grid{display:grid;grid-template-columns:1fr;gap:12px;align-items:start}
+@media (min-width:760px){.lab-grid{grid-template-columns:minmax(0,420px) minmax(0,1fr)}}
+.steps{padding-left:22px}
+.steps li{margin:8px 0}
+.lc-cols{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:760px){.lc-cols{grid-template-columns:1fr 1fr}}
+.lc-pool,.lc-seq{display:flex;flex-direction:column;gap:8px;margin:8px 0;padding:0}
+.lc-seq{padding-left:26px}
+.lc-seq li{margin:0}
+.lc-pool .opt,.lc-seq .opt{width:100%;margin:0}
+table.cl td.bad{background:var(--bad-soft);color:var(--bad);font-weight:700}
+table.cl tr.dupr td{background:var(--warn-soft)}
+
+/* python judge */
+.pystatus{font-size:.9rem;font-weight:600;padding:8px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line);margin:8px 0}
+.pystatus.ready{color:var(--ok);border-color:var(--ok)}
+.pystatus.error{color:var(--bad);border-color:var(--bad)}
+.pystatus.loading{color:var(--warn)}
+textarea.codeedit{font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:14px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:240px;background:var(--code);color:#e6e9ff;border-color:var(--code)}
+.numin{width:160px}
+.revtabs{margin-bottom:6px}
+.topic button.b.alt{margin-top:10px}
+@media print{.topic button.b.alt,.revtabs{display:none!important}}

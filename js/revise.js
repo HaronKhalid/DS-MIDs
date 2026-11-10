@@ -1,0 +1,90 @@
+/* Flashcards and glossary. Format: [topic number, term, meaning]. */
+const GL=[
+[1,"Data Science","Extracting useful insights from raw data by combining statistics, programming and domain knowledge."],
+[1,"Data Science lifecycle","Define the problem → acquire → explore → clean → EDA → features → model → evaluate → deploy → monitor."],
+[1,"Problem definition","First lifecycle step: understand what must be solved, the target and the success criteria."],
+[1,"EDA","Exploratory Data Analysis: explore data with statistics and charts to find patterns. Typical first checks: shape, info, describe, null check."],
+[1,"Model evaluation","Testing the model on unseen rows with suitable metrics."],
+[1,"Deployment and monitoring","Making the model live and tracking performance, errors and data drift."],
+[2,"Data Scientist","Models and statistics; tools: Python, R, SQL, TensorFlow."],
+[2,"Data Analyst","Reporting and visualisation; tools: Excel, SQL, Tableau, Power BI."],
+[2,"Data Engineer","Builds data pipelines and infrastructure; tools: Spark, Hadoop, Airflow, Kafka."],
+[2,"Machine Learning Engineer","Deploys and maintains models in production; tools: PyTorch, TensorFlow, Docker."],
+[2,"Data Architect","Designs the overall data architecture and integration."],
+[2,"Business / Domain Analyst","Connects business needs with data solutions."],
+[3,"Big Data","Very large, complex, fast-growing or diverse data that traditional methods struggle to handle."],
+[3,"Volume","How much data (terabytes, petabytes)."],
+[3,"Velocity","How fast data is generated and processed (e.g. real-time data)."],
+[3,"Variety","How many forms: structured, semi-structured, unstructured."],
+[3,"Veracity","How accurate and trustworthy the data is."],
+[3,"Value","How useful the data is: the business insight obtained."],
+[4,"Structured data","Fixed rows and columns, e.g. SQL tables."],
+[4,"Semi-structured data","Flexible structure with keys/tags, e.g. JSON and XML."],
+[4,"Unstructured data","No predefined table form, e.g. images, text, audio, video."],
+[4,"Numerical data","Numbers. Discrete = counted (students); continuous = measured (height)."],
+[4,"Categorical data","Labels or groups. Nominal = no order (city); ordinal = meaningful order (low/medium/high)."],
+[4,"Boolean","True/False or 1/0."],
+[5,"Data","Raw facts and figures (forms: pictorial, textual, digital)."],
+[5,"Data acquisition","Obtaining data from relevant sources for analysis."],
+[5,"Primary data","Collected directly for the current purpose: interview, survey, questionnaire, experiment, sensor."],
+[5,"Secondary data","Already collected by someone else: repository, database, cloud, government dataset."],
+[5,"Data quality dimensions","Accuracy, completeness, consistency, validity, uniqueness, timeliness."],
+[5,"Acquisition concerns","Permission, privacy, quality, relevance, reliability, cost, format and collection bias."],
+[6,"Mean","Sum of values / count. Sensitive to extreme values."],
+[6,"Median","Middle value after sorting. Robust to outliers."],
+[6,"Mode","Most frequent value."],
+[6,"Range","Maximum − minimum."],
+[6,"Variance","Average of squared deviations from the mean."],
+[6,"Standard deviation","Square root of variance; typical distance from the mean."],
+[6,"Normal distribution","Bell curve: about 68% within 1 SD, 95% within 2 SD, 99.7% within 3 SD."],
+[6,"z-score","(x − mean) / SD: how many standard deviations a value is from the mean."],
+[6,"Correlation (r)","Strength and direction of a relationship, from −1 to +1; r = Cov(X,Y) / (sx · sy)."],
+[6,"Correlation vs causation","Correlation shows association, not cause (ice-cream sales and drowning are both driven by hot weather)."],
+[6,"Hypothesis testing","Define H0 → define H1 → set alpha (0.05) → run test → p-value → compare → decision."],
+[6,"p-value","Probability of a result at least this extreme if H0 is true. Below alpha → reject H0. It is NOT the probability that H0 is true."],
+[6,"Probability","A number from 0 (impossible) to 1 (certain) measuring how likely an event is."],
+[7,"Classification","Supervised task that predicts a categorical label (binary, multiclass, multilabel)."],
+[7,"Confusion matrix","Table comparing actual with predicted classes: TP, TN, FP, FN."],
+[7,"True Positive (TP)","Model said ‘yes’ and it was right (fraud predicted, really fraud)."],
+[7,"True Negative (TN)","Model said ‘no’ and it was right."],
+[7,"False Positive (FP)","Model said ‘yes’ but it was wrong (genuine flagged as fraud). Type I error."],
+[7,"False Negative (FN)","Model said ‘no’ but it was wrong (fraud missed). Type II error."],
+[7,"Accuracy","(TP + TN) / (TP + TN + FP + FN). Can mislead on imbalanced data."],
+[7,"Precision","TP / (TP + FP): of the predicted ‘yes’, how many were right. Reduces false alarms."],
+[7,"Recall (sensitivity)","TP / (TP + FN): of the actual ‘yes’, how many were found. Reduces missed cases."],
+[7,"Specificity","TN / (TN + FP): of the actual ‘no’, how many were found."],
+[7,"F1 score","Harmonic mean of precision and recall: 2PR / (P + R)."],
+[7,"Imbalanced data","One class is much rarer than the other; accuracy alone is misleading."],
+[8,"Generalisation","Performing well on new, unseen data."],
+[8,"Underfitting","Model too simple: poor on training AND new data. High bias."],
+[8,"Overfitting","Model too complex: memorises training data and noise; great on training, poor on new data. High variance."],
+[8,"Good fit","Captures the true pattern: good on training and new data, with a small gap."],
+[8,"Quick diagnosis","Both low → underfitting. Train very high, test much lower → overfitting. Both high and close → good fit."],
+[8,"Fixes for underfitting","More complexity, more useful features, longer training, less regularisation."],
+[8,"Fixes for overfitting","Simpler model, regularisation, cross-validation, pruning, early stopping, more data."],
+[9,"NumPy","Numerical computing and arrays: np.array(), np.mean(), np.dot()."],
+[9,"Pandas","Data manipulation with DataFrames: read_csv, groupby, merge."],
+[9,"Matplotlib","Basic plotting: plt.plot(), plt.bar(), plt.scatter(), plt.show()."],
+[9,"Seaborn","Statistical visualisation: sns.heatmap(), sns.boxplot(), sns.pairplot()."],
+[9,"Scikit-learn","Machine learning: train_test_split, classification, regression, clustering."],
+[9,"TensorFlow / Keras","Deep learning: model.compile(), model.fit()."],
+[9,"Orange","Visual tool: drag widgets and connect them. Good for demos and teaching, not for production."],
+[9,"Weka","Java tool with menus and tabs; strong in classic machine learning."],
+[9,"Data cleaning","Fixing missing, duplicate, incorrect, inconsistent data; investigate outliers instead of blindly deleting."],
+[9,"Data manipulation","Filtering, sorting, grouping, aggregating, merging, creating derived columns."],
+[9,"Imputation","Replacing missing values with a justified estimate such as mean or median."],
+[9,"Chart choice","Bar = categories; line = trend over time; pie = simple part-to-whole; histogram = distribution; scatter = relationship; box plot = spread and outliers."]
+];
+let fc=[],fi=0,flip=false;
+function fcLoad(){const c=$("#fcCh").value;fc=GL.filter(g=>c==="all"||g[0]==+c);fi=0;flip=false;fcDraw()}
+function fcDraw(){const g=fc[fi];if(!g)return;const e=$("#fcCard");e.classList.toggle("back",flip);e.innerHTML=flip?`<div>${esc(g[2])}</div>`:`<div><small style="color:var(--muted)">Topic ${g[0]}</small><br><b>${esc(g[1])}</b></div>`;$("#fcInfo").textContent=`Card ${fi+1} of ${fc.length}`}
+$("#fcCard").onclick=$("#fcFlip").onclick=()=>{flip=!flip;fcDraw()};
+$("#fcNext").onclick=()=>{fi=(fi+1)%fc.length;flip=false;fcDraw()};
+$("#fcPrev").onclick=()=>{fi=(fi-1+fc.length)%fc.length;flip=false;fcDraw()};
+$("#fcShuf").onclick=()=>{fc=shuffle(fc);fi=0;flip=false;fcDraw()};
+$("#fcCh").onchange=fcLoad;
+$("#fcCh").innerHTML='<option value="all">All topics</option>'+CHAPTERS.map(([id,n],i)=>`<option value="${i+1}">${i+1}. ${esc(n)}</option>`).join("");
+fcLoad();
+function glo(){const s=$("#gloSearch").value.toLowerCase();
+ $("#gloTable").innerHTML="<tr><th>Topic</th><th>Term</th><th>Meaning</th></tr>"+GL.filter(g=>!s||(g[1]+g[2]).toLowerCase().includes(s)).map(g=>`<tr><td>${g[0]}</td><td><b>${esc(g[1])}</b></td><td>${esc(g[2])}</td></tr>`).join("")}
+$("#gloSearch").oninput=glo;glo();
