@@ -27,12 +27,13 @@ function chLegend(items){return `<div class="legend">${items.map(([c,t])=>`<span
 function chartBars(items,o={}){
   const max=o.max||Math.max(...items.map(i=>i.value),1)*1.15;
   const n=items.length,W=o.w||chW(),H=o.h||260,L=46,R=14,T=26,B=o.bottom||56;
-  const f=chFrame({w:W,h:H,xmin:0,xmax:n,ymin:0,ymax:max,xcats:true,bottom:B,top:T,yfmt:o.yfmt,title:o.title,ylabel:o.ylabel,alt:o.alt});
+  const ymn=o.ymin||0;
+  const f=chFrame({w:W,h:H,xmin:0,xmax:n,ymin:ymn,ymax:max,xcats:true,bottom:B,top:T,yfmt:o.yfmt,title:o.title,ylabel:o.ylabel,alt:o.alt});
   const bw=(W-L-R)/n;
   let g="";
   items.forEach((it,i)=>{
-    const x=L+i*bw+bw*0.15,w=bw*0.7,y=f.Y(it.value);
-    g+=`<rect x="${x}" y="${y}" width="${w}" height="${f.Y(0)-y}" rx="4" style="fill:${it.color||COL.brand}"/>`;
+    const x=L+i*bw+bw*0.15,w=bw*0.7,y=f.Y(Math.max(it.value,ymn));
+    g+=`<rect x="${x}" y="${y}" width="${w}" height="${f.Y(ymn)-y}" rx="4" style="fill:${it.color||COL.brand}"/>`;
     g+=`<text x="${x+w/2}" y="${y-5}" text-anchor="middle" font-size="12" font-weight="700" style="fill:var(--ink)">${o.fmt?o.fmt(it.value):nf(it.value,2)}</text>`;
     const words=String(it.label).split(" ");
     g+=words.map((wd,k)=>`<text x="${x+w/2}" y="${H-B+16+k*13}" text-anchor="middle" font-size="11" style="fill:var(--muted)">${esc(wd)}</text>`).join("");
@@ -100,43 +101,43 @@ function chartBox(q,o={}){
   return `<div class="chartbox">${f.open}${g}${f.close}${chLegend([[COL.brand,"box = Q1 to Q3"],[COL.ok,"median"],[COL.bad,"outlier"]])}</div>`;
 }
 
-/* normal-distribution maths */
-function erf(x){const s=x<0?-1:1;x=Math.abs(x);const t=1/(1+0.3275911*x);const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y}
-const normCdf=z=>0.5*(1+erf(z/Math.SQRT2));
-const normPdf=(x,mu,sd)=>Math.exp(-0.5*((x-mu)/sd)**2)/(sd*Math.sqrt(2*Math.PI));
-
-/* normal curve. o:{mu,sd,k (shade mu±k sd) | from,to, marker} */
-function chartNormal(o){
-  const mu=o.mu,sd=o.sd,xmin=mu-4*sd,xmax=mu+4*sd,ymax=normPdf(mu,mu,sd)*1.15;
-  const f=chFrame({w:o.w||chW(),h:o.h||260,xmin,xmax,ymin:0,ymax,xticks:8,yticks:3,xfmt:v=>nf(v,o.dec??1),yfmt:()=>"",left:14,xlabel:o.xlabel||"value",title:o.title,alt:o.alt||"normal curve"});
-  const curve=(a,b)=>{const p=[];for(let i=0;i<=80;i++){const x=a+(b-a)*i/80;p.push(f.X(x).toFixed(1)+","+f.Y(normPdf(x,mu,sd)).toFixed(1))}return p};
-  let g="";
-  const a=o.from!==undefined?o.from:(o.k!==undefined?mu-o.k*sd:null),b=o.to!==undefined?o.to:(o.k!==undefined?mu+o.k*sd:null);
-  if(a!==null){const lo=Math.max(a,xmin),hi=Math.min(b,xmax);g+=`<polygon fill-opacity=".35" style="fill:${COL.brand}" points="${f.X(lo)},${f.Y(0)} ${curve(lo,hi).join(" ")} ${f.X(hi)},${f.Y(0)}"/>`}
-  if(o.tails){o.tails.forEach(([lo,hi])=>{lo=Math.max(lo,xmin);hi=Math.min(hi,xmax);g+=`<polygon fill-opacity=".45" style="fill:${COL.bad}" points="${f.X(lo)},${f.Y(0)} ${curve(lo,hi).join(" ")} ${f.X(hi)},${f.Y(0)}"/>`})}
-  g+=`<polyline fill="none" stroke-width="2.5" style="stroke:var(--ink)" points="${curve(xmin,xmax).join(" ")}"/>`;
-  g+=`<line x1="${f.X(mu)}" x2="${f.X(mu)}" y1="${f.T}" y2="${f.H-f.B}" stroke-dasharray="4 4" style="stroke:var(--muted)"/>`;
-  if(o.marker!==undefined&&o.marker>=xmin&&o.marker<=xmax)g+=`<line x1="${f.X(o.marker)}" x2="${f.X(o.marker)}" y1="${f.T}" y2="${f.H-f.B}" stroke-width="2.5" style="stroke:${COL.warn}"/>`;
-  return `<div class="chartbox">${f.open}${g}${f.close}</div>`;
+/* pie chart. items: [{label,value,color}] (use only for a few parts of one whole) */
+function chartPie(items,o={}){
+  const tot=sum(items.map(i=>i.value))||1,W=o.w||chW(),H=o.h||240,cx=Math.min(120,W/3),cy=H/2+8,r=Math.min(95,H/2-22);
+  const pal=[COL.brand,COL.warn,COL.ok,COL.purple,COL.bad,"#8a96a3"];
+  let a0=-Math.PI/2,g="";
+  items.forEach((it,i)=>{
+    const frac=it.value/tot,a1=a0+frac*2*Math.PI,large=frac>0.5?1:0;
+    const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    g+=frac>=0.9999?`<circle cx="${cx}" cy="${cy}" r="${r}" style="fill:${it.color||pal[i%pal.length]}"/>`
+      :`<path d="M${cx},${cy} L${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 ${large} 1 ${x1.toFixed(1)},${y1.toFixed(1)} Z" style="fill:${it.color||pal[i%pal.length]};stroke:var(--card)" stroke-width="2"/>`;
+    a0=a1;
+  });
+  const lx=cx+r+24;
+  g+=items.map((it,i)=>`<rect x="${lx}" y="${cy-items.length*11+i*22}" width="12" height="12" rx="3" style="fill:${it.color||pal[i%pal.length]}"/><text x="${lx+18}" y="${cy-items.length*11+i*22+11}" font-size="12" style="fill:var(--ink)">${esc(it.label)}: ${nf(it.value/tot*100,0)}%</text>`).join("");
+  return `<div class="chartbox"><svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="${esc(o.title||"pie chart")}">${o.title?`<text x="${W/2}" y="14" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--ink)">${esc(o.title)}</text>`:""}${g}</svg></div>`;
 }
 
-/* confusion matrix as a coloured grid (HTML) */
-function chartConfusion(tp,tn,fp,fn){
-  const tot=tp+tn+fp+fn||1;
-  const cell=(v,l,cls)=>`<div class="cm-cell ${cls}"><b>${v}</b><small>${l}</small><small>${Math.round(v/tot*100)}%</small></div>`;
-  return `<div class="cm" role="table" aria-label="Confusion matrix"><div class="cm-h"></div><div class="cm-h">Predicted<br>Positive</div><div class="cm-h">Predicted<br>Negative</div>
-    <div class="cm-h">Actual<br>Positive</div>${cell(tp,"TP (correct)","good")}${cell(fn,"FN (Type II)","bad")}
-    <div class="cm-h">Actual<br>Negative</div>${cell(fp,"FP (Type I)","bad")}${cell(tn,"TN (correct)","good")}</div>`;
+/* heatmap of a matrix (for example a correlation matrix, values -1..1). */
+function chartHeat(labels,m,o={}){
+  const n=labels.length,cell=Math.max(44,Math.min(70,(chW()-90)/n)),L=78,T=o.title?34:14,W=L+n*cell+10,H=T+n*cell+54;
+  const colr=v=>{const t=Math.max(-1,Math.min(1,v));const a=Math.abs(t);const base=t>=0?[201,42,42]:[48,80,208];const mix=c=>Math.round(255-(255-c)*a);return `rgb(${mix(base[0])},${mix(base[1])},${mix(base[2])})`};
+  let g="";
+  m.forEach((row,i)=>row.forEach((v,j)=>{g+=`<rect x="${L+j*cell}" y="${T+i*cell}" width="${cell-2}" height="${cell-2}" rx="4" style="fill:${colr(v)}"/><text x="${L+j*cell+cell/2-1}" y="${T+i*cell+cell/2+4}" text-anchor="middle" font-size="12" font-weight="700" style="fill:${Math.abs(v)>0.55?"#fff":"#111"}">${nf(v,2)}</text>`}));
+  g+=labels.map((l,i)=>`<text x="${L-6}" y="${T+i*cell+cell/2+4}" text-anchor="end" font-size="11" style="fill:var(--ink)">${esc(l)}</text><text x="${L+i*cell+cell/2}" y="${T+n*cell+14}" text-anchor="middle" font-size="11" style="fill:var(--ink)">${esc(l)}</text>`).join("");
+  g+=`<text x="${W/2}" y="${H-8}" text-anchor="middle" font-size="11" style="fill:var(--muted)">red = positive correlation · blue = negative · white = none</text>`;
+  return `<div class="chartbox"><svg viewBox="0 0 ${W} ${H}" class="chart" role="img" aria-label="${esc(o.title||"heatmap")}">${o.title?`<text x="${W/2}" y="14" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--ink)">${esc(o.title)}</text>`:""}${g}</svg></div>`;
 }
 
 /* build a chart from a plain spec (used by scenarios) */
 function chartFromSpec(s){
   if(!s)return "";
-  if(s.type==="confusion")return chartConfusion(s.tp,s.tn,s.fp,s.fn);
   if(s.type==="bars")return chartBars(s.items.map(i=>({label:i[0],value:i[1],color:i[2]})),{title:s.title,ylabel:s.ylabel,fmt:s.fmt==="pct"?v=>nf(v*100,0)+"%":undefined,yfmt:s.fmt==="pct"?v=>nf(v*100,0)+"%":undefined,max:s.max});
   if(s.type==="lines")return chartLines(s.series.map((x,i)=>({name:x.name,color:x.color||[COL.brand,COL.warn,COL.ok,COL.bad][i%4],pts:x.pts,dots:true})),{title:s.title,xlabel:s.xlabel,ylabel:s.ylabel,xticks:s.xticks,ymax:s.ymax,ymin:s.ymin,xmin:s.xmin,xmax:s.xmax});
   if(s.type==="hist")return chartHist(s.values,{title:s.title,xlabel:s.xlabel,bins:s.bins,mean:s.mean,median:s.median});
   if(s.type==="scatter")return chartScatter(s.points,{title:s.title,xlabel:s.xlabel,ylabel:s.ylabel,line:s.line});
-  if(s.type==="normal")return chartNormal(s);
+  if(s.type==="pie")return chartPie(s.items.map(i=>({label:i[0],value:i[1]})),{title:s.title});
+  if(s.type==="heat")return chartHeat(s.labels,s.matrix,{title:s.title});
+  if(s.type==="box")return chartBox(s.q,{xlabel:s.xlabel});
   return "";
 }

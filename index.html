@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Data Science Mids Guide</title>
-<meta name="description" content="Interactive Data Science mid-term study guide: notes, Urdu examples, graphs, scenarios, quizzes and a Python code judge.">
+<meta name="description" content="Data Science mid-term study guide (weeks 1-7 and 10): notes, Urdu examples, graphs, scenarios, quizzes and a Python code judge.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
@@ -29,18 +29,18 @@
 <section class="page" id="home">
   <div class="hero">
     <h1>Data Science Mids Guide</h1>
-    <p>Easy notes from your lectures and handwritten notes, with Urdu examples, live graphs, scenario practice, quizzes and a Python code judge.</p>
+    <p>Mid-term topics: Weeks 1–7 and Week 10 of the lecture plan. Easy notes with Urdu examples, live graphs, scenario practice, quizzes and a Python code judge.</p>
     <button class="b btn-big" id="continueBtn">▶ Start learning</button>
   </div>
 
   <div id="homeScen"></div>
 
-  <h2>📚 Topics</h2>
+  <h2>📚 Mid-term topics</h2>
   <div class="chap-grid" id="chapCards"></div>
 
   <h2>🧪 Try, practise, revise</h2>
   <div class="practice-grid">
-    <button class="chap-card" data-go="labs"><div class="t">🧪 Labs</div><div class="s">Graphs, calculators and a Python code judge</div></button>
+    <button class="chap-card" data-go="labs"><div class="t">🧪 Labs</div><div class="s">Graphs, calculators, Pandas explorer and a Python judge</div></button>
     <button class="chap-card" data-go="quiz"><div class="t">✍️ Quiz</div><div class="s">Quick, scenario and mock exam modes</div></button>
     <button class="chap-card" data-go="cards"><div class="t">🃏 Flashcards</div><div class="s">Quick revision of all terms</div></button>
     <button class="chap-card" data-go="sheet"><div class="t">📄 Cheat sheet</div><div class="s">Formulas and tables on one page</div></button>
@@ -48,12 +48,12 @@
 
   <details class="fold"><summary>📅 2-day study plan</summary><div>
     <p><b>Day 1</b></p><ul>
-      <li>Topics 1–5: lifecycle, roles, big data, data types, data acquisition</li>
-      <li>Do the Lifecycle builder lab and the scenarios for these topics</li></ul>
+      <li>Week 1 Introduction · Week 2 Python · Week 3 Data acquisition · Week 4 Data cleaning</li>
+      <li>Labs: Lifecycle builder, Python judge, Scaling &amp; encoding, Data cleaning</li></ul>
     <p><b>Day 2</b></p><ul>
-      <li>Topics 6–9: statistics, classification metrics, over/underfitting, tools</li>
-      <li>Do the Confusion matrix, Statistics and Fitting labs, then the Python judge</li>
-      <li>Finish with flashcards and a full mock exam</li></ul></div></details>
+      <li>Week 5 Pandas · Week 6 EDA · Week 7 Visualization · Week 10 ML fundamentals</li>
+      <li>Labs: Pandas explorer, Descriptive stats, Correlation, Chart chooser, Train/test split, Over/underfitting</li>
+      <li>Finish with scenarios, flashcards and a full mock exam</li></ul></div></details>
 
   <details class="fold"><summary>🎯 How to study with this page</summary><div><ul>
     <li>Tap a lesson to open it. Read the <b>💡 key point</b> first, then the green <b>Urdu example</b>.</li>
@@ -66,24 +66,61 @@
 
   <div class="card"><b>Your progress:</b> <span id="ptext">0%</span><br>
     <button class="b alt" id="resetP" style="margin-top:10px">Reset progress</button></div>
-  <div class="warn">Content comes from your handwritten notes, the exam-preparation notes and the course outline in this repository. The 16-week outline in <code>scratchpad.md</code> is a larger plan; this site covers the mid-term topics you listed.</div>
+  <div class="warn">Scope confirmed for the mid-term: lecture plan Weeks 1, 2, 3, 4, 5, 6, 7 and 10, plus the points from your handwritten notes that belong to those weeks.</div>
 </section>
 
-<!-- ============================ TOPIC 1 ============================ -->
+<!-- ============================ TOPIC 1 / WEEK 1 ============================ -->
 <section class="page" id="c1">
-  <h1>Data Science &amp; the lifecycle</h1>
-  <p>What Data Science is, the steps of a project, and how to take a first look at data.</p>
+  <h1>Introduction to Data Science</h1>
+  <p>Definition, history, applications, how it differs from AI, ML and analytics, the lifecycle and the roles in a data team.</p>
 
   <article class="topic" data-id="c1-1" data-title="What is Data Science?">
     <h3>What is Data Science?</h3>
     <div class="key">Data Science means getting <b>useful insights from raw data</b>. It mixes <b>statistics</b>, <b>programming</b> and <b>domain knowledge</b>.</div>
     <ul><li>Statistics: understand patterns and uncertainty.</li><li>Programming: collect, clean and analyse data at scale (Python, R, SQL).</li><li>Domain knowledge: know what the numbers mean for the real problem.</li></ul>
     <p><b>Exam definition:</b> Data science is an interdisciplinary field that combines mathematics, statistics, computer science, artificial intelligence and domain expertise to extract meaningful insights and knowledge from raw, structured or unstructured data.</p>
-    <p><b>Examples:</b> predicting student performance, detecting fraudulent bank transactions, recommending videos, predicting house prices.</p>
     <div class="ur"><b class="t">اردو مثال</b>ڈیٹا سائنس کا مطلب خام ڈیٹا سے کارآمد معلومات نکالنا ہے۔ جیسے دکاندار پچھلے سالوں کی فروخت دیکھ کر اندازہ لگاتا ہے کہ عید پر کون سا سامان زیادہ بِکے گا۔ اس میں شماریات، پروگرامنگ اور اس شعبے کی سمجھ، تینوں شامل ہوتی ہیں۔</div>
   </article>
 
-  <article class="topic" data-id="c1-2" data-title="The Data Science lifecycle">
+  <article class="topic" data-id="c1-2" data-title="History and development">
+    <h3>History and development</h3>
+    <div class="scroll"><table><tr><th>When</th><th>Milestone (commonly cited)</th></tr>
+     <tr><td>1962</td><td>John Tukey argues for a science of <b>data analysis</b> in “The Future of Data Analysis”.</td></tr>
+     <tr><td>1974</td><td>Peter Naur uses the term <b>“data science”</b> for the science of dealing with data.</td></tr>
+     <tr><td>1997–2001</td><td>Statisticians (C. F. Jeff Wu, William Cleveland) propose data science as an extension of statistics with computing.</td></tr>
+     <tr><td>2000s</td><td>Growth of the web, large-scale data tools (Hadoop, 2006) and cheap cloud storage make analysis of huge datasets possible.</td></tr>
+     <tr><td>2008–2012</td><td>The job title <b>“data scientist”</b> becomes popular; deep learning and machine learning advance quickly.</td></tr>
+     <tr><td>Today</td><td>Data science is used everywhere, with AI, automation and cloud platforms.</td></tr></table></div>
+    <div class="warn">These are widely quoted milestones. Check your lecture slides for the dates and names your teacher stresses.</div>
+    <div class="key">Short story: <b>statistics → computing → large-scale data → machine learning and AI</b>.</div>
+  </article>
+
+  <article class="topic" data-id="c1-3" data-title="Applications of Data Science">
+    <h3>Applications of Data Science</h3>
+    <div class="scroll"><table><tr><th>Field</th><th>Example</th></tr>
+     <tr><td>Healthcare</td><td>Predicting disease risk from test results</td></tr>
+     <tr><td>Banking and finance</td><td>Detecting fraudulent card transactions; credit scoring</td></tr>
+     <tr><td>E-commerce and media</td><td>Recommending products or videos</td></tr>
+     <tr><td>Education</td><td>Predicting student performance</td></tr>
+     <tr><td>Real estate</td><td>Predicting house prices</td></tr>
+     <tr><td>Transport</td><td>Route planning, estimating arrival time</td></tr>
+     <tr><td>Agriculture</td><td>Predicting crop yield from weather and soil data</td></tr>
+     <tr><td>Manufacturing</td><td>Predicting machine failures</td></tr></table></div>
+    <button class="b alt" data-go="scenarios">🧩 Practise applications in Scenarios</button>
+  </article>
+
+  <article class="topic" data-id="c1-4" data-title="Data Science vs AI vs ML vs Data Analytics">
+    <h3>Data Science vs AI vs ML vs Data Analytics</h3>
+    <div class="scroll"><table><tr><th>Term</th><th>Meaning</th><th>Example</th></tr>
+     <tr><td><b>Artificial Intelligence (AI)</b></td><td>Machines doing tasks that normally need human intelligence</td><td>A chatbot, a self-driving car</td></tr>
+     <tr><td><b>Machine Learning (ML)</b></td><td>A <b>subset of AI</b>: algorithms learn patterns from data instead of following fixed rules</td><td>Spam filter learned from labelled emails</td></tr>
+     <tr><td><b>Data Science (DS)</b></td><td>Interdisciplinary field that uses statistics, programming, domain knowledge (and often ML) to get insight from data</td><td>Predicting student performance end to end</td></tr>
+     <tr><td><b>Data Analytics (DA)</b></td><td>Examining (mostly past) data and presenting it clearly: reports, dashboards</td><td>Monthly sales dashboard</td></tr></table></div>
+    <div class="key"><b>AI ⊃ ML</b>. Data science <b>uses</b> ML (and statistics) but is broader: it covers the whole path from raw data to insight.</div>
+    <button class="b alt" data-go="scenarios">🧩 Practise the differences in Scenarios</button>
+  </article>
+
+  <article class="topic" data-id="c1-5" data-title="The Data Science lifecycle">
     <h3>The Data Science lifecycle</h3>
     <div class="key">A lifecycle is a step-by-step process: <b>Understand → Acquire → Explore → Clean → Analyse → Engineer → Model → Evaluate → Deploy → Monitor</b>.</div>
     <div class="scroll"><table><tr><th>#</th><th>Stage</th><th>What you do</th></tr>
@@ -94,7 +131,7 @@
      <tr><td>5</td><td>EDA and analysis</td><td>Use statistics and charts to discover patterns and relationships.</td></tr>
      <tr><td>6</td><td>Feature engineering / selection</td><td>Create useful features and select relevant variables.</td></tr>
      <tr><td>7</td><td>Model building (ML modelling)</td><td>Train machine-learning or statistical models.</td></tr>
-     <tr><td>8</td><td>Model evaluation</td><td>Test the model on <b>unseen rows</b> using suitable metrics.</td></tr>
+     <tr><td>8</td><td>Model evaluation</td><td>Test the model on <b>unseen rows</b> using suitable measures.</td></tr>
      <tr><td>9</td><td>Deployment</td><td>Put the model into practical use (make it live).</td></tr>
      <tr><td>10</td><td>Monitoring and maintenance</td><td>Track performance, data drift, errors and when to retrain.</td></tr></table></div>
     <div class="warn">Your handwritten notes list a shorter version (problem definition, data collection, data cleaning, EDA, ML modelling, evaluation, deployment and monitor). Frameworks may use different numbers or names of stages; the order of ideas is the same.</div>
@@ -102,38 +139,8 @@
     <button class="b alt" data-lab="lifecycle">🧪 Open the Lifecycle builder lab</button>
   </article>
 
-  <article class="topic" data-id="c1-3" data-title="EDA and visualisation: the first look">
-    <h3>EDA and visualisation: the first look</h3>
-    <div class="key"><b>EDA</b> (Exploratory Data Analysis) = explore the data to find patterns. <b>Data visualisation</b> = show data as charts and graphs.</div>
-    <p>From your notes, EDA always begins with: <b>shape → info → describe → null check</b>.</p>
-    <div class="scroll"><table><tr><th>Step</th><th>Pandas call (illustrative)</th><th>Tells you</th></tr>
-     <tr><td>shape</td><td class="code">df.shape</td><td>number of rows and columns</td></tr>
-     <tr><td>info</td><td class="code">df.info()</td><td>column names, data types, non-null counts</td></tr>
-     <tr><td>describe</td><td class="code">df.describe()</td><td>count, mean, std, min, quartiles, max</td></tr>
-     <tr><td>null check</td><td class="code">df.isnull().sum()</td><td>missing values per column</td></tr></table></div>
-    <pre class="code">import pandas as pd
-df = pd.read_csv("students.csv")   # needs your own file
-print(df.shape)
-df.info()
-print(df.describe())
-print(df.isnull().sum())</pre>
-    <p class="muted">This code needs a CSV file named students.csv; it is shown for learning and was not run here.</p>
-  </article>
-
-  <div class="card"><b>📝 Mid-exam style questions (Topic 1)</b>
-    <details><summary>Define Data Science and explain the lifecycle.</summary>Data Science extracts insights from raw data using statistics, programming and domain knowledge. Lifecycle: problem definition → data acquisition → exploration → cleaning → EDA → feature engineering → model building → evaluation → deployment → monitoring.</details>
-    <details><summary>Why is evaluation done on unseen data?</summary>To check the model generalises instead of memorising the training data.</details>
-    <details><summary>Why is monitoring needed after deployment?</summary>Data and behaviour change (drift), so performance can drop and the model may need retraining.</details>
-  </div>
-</section>
-
-<!-- ============================ TOPIC 2 ============================ -->
-<section class="page" id="c2">
-  <h1>Roles in Data Science</h1>
-  <p>Who does what in a data team, and which tools each role uses.</p>
-
-  <article class="topic" data-id="c2-1" data-title="The main roles and their tools">
-    <h3>The main roles and their tools</h3>
+  <article class="topic" data-id="c1-6" data-title="Roles and responsibilities in Data Science">
+    <h3>Roles and responsibilities in Data Science</h3>
     <div class="key">Data Scientist = <b>models and statistics</b>. Data Analyst = <b>reports and visualisation</b>. Data Engineer = <b>pipelines</b>. ML Engineer = <b>deploys models</b>.</div>
     <div class="scroll"><table><tr><th>Role</th><th>Main job</th><th>Tools (from your notes)</th></tr>
      <tr><td><b>Data Scientist</b></td><td>Modelling and statistics; analyses data and builds predictive models</td><td>Python, R, SQL, TensorFlow</td></tr>
@@ -142,101 +149,150 @@ print(df.isnull().sum())</pre>
      <tr><td><b>ML Engineer</b></td><td>Deploys models to production and maintains ML systems</td><td>PyTorch, TensorFlow, Docker</td></tr>
      <tr><td>Data Architect</td><td>Designs data architecture and integration</td><td>Databases, cloud, architecture</td></tr>
      <tr><td>Business / Domain Analyst</td><td>Connects business needs with data solutions</td><td>Domain knowledge, communication</td></tr></table></div>
+    <p>The <b>value</b> of all these roles is <b>business insight</b> from data. Roles overlap in real teams, but each has a main responsibility.</p>
     <div class="ur"><b class="t">اردو مثال</b>ہسپتال میں: ڈیٹا انجینئر مریضوں کے ریکارڈ کی پائپ لائن بناتا ہے، ڈیٹا اینالسٹ ماہانہ رپورٹ بناتا ہے، ڈیٹا سائنٹسٹ بیماری کی پیشگوئی کا ماڈل بناتا ہے اور ایم ایل انجینئر اسے اصل نظام میں چلاتا ہے۔</div>
   </article>
 
-  <article class="topic" data-id="c2-2" data-title="Telling the roles apart (exam focus)">
-    <h3>Telling the roles apart (exam focus)</h3>
-    <div class="key">The <b>value</b> of all these roles is <b>business insight</b> from data.</div>
-    <ul><li><b>Data Engineer</b> builds infrastructure → data flows reliably.</li><li><b>Data Analyst</b> describes what happened (reporting, descriptive analysis).</li><li><b>Data Scientist</b> builds models and finds insight, often predicting what will happen.</li><li><b>ML Engineer</b> turns a model into a working, monitored product.</li></ul>
-    <p><b>Common mix-up:</b> calling every data job “data scientist”. In real teams the roles overlap, but each has a main responsibility.</p>
-    <p>Practise: try the scenarios “Who does which job?” and “The startup's first data hire”.</p>
-    <button class="b alt" data-go="scenarios">🧩 Go to Scenarios</button>
-  </article>
-
-  <div class="card"><b>📝 Mid-exam style questions (Topic 2)</b>
-    <details><summary>Explain the roles of Data Scientist, Data Analyst, Data Engineer and ML Engineer.</summary>Scientist: models and statistics. Analyst: reports and dashboards. Engineer: pipelines and infrastructure. ML Engineer: deploying and maintaining models. Give tools for each.</details>
-    <details><summary>Which role builds infrastructure and which builds models?</summary>Data Engineer builds infrastructure; Data Scientist builds models and insights.</details>
+  <div class="card"><b>📝 Mid-exam style questions (Week 1)</b>
+    <details><summary>Define Data Science and explain the lifecycle.</summary>Data Science extracts insights from raw data using statistics, programming and domain knowledge. Lifecycle: problem definition → data acquisition → exploration → cleaning → EDA → feature engineering → model building → evaluation → deployment → monitoring.</details>
+    <details><summary>Differentiate Data Science, AI, ML and Data Analytics.</summary>AI: machines doing intelligent tasks. ML: subset of AI that learns from data. Data Science: interdisciplinary, whole path from data to insight. Data Analytics: examining data and reporting (dashboards).</details>
+    <details><summary>Explain the roles of Data Scientist, Analyst, Engineer and ML Engineer.</summary>Scientist: models and statistics. Analyst: reports and dashboards. Engineer: pipelines and infrastructure. ML Engineer: deploying and maintaining models. Give tools for each.</details>
+    <details><summary>Why is monitoring needed after deployment?</summary>Data and behaviour change (drift), so performance can drop and the model may need retraining.</details>
   </div>
 </section>
 
-<!-- ============================ TOPIC 3 ============================ -->
-<section class="page" id="c3">
-  <h1>Big Data (the 5 Vs)</h1>
-  <p>What makes data “big” and the five Vs that describe it.</p>
+<!-- ============================ TOPIC 2 / WEEK 2 ============================ -->
+<section class="page" id="c2">
+  <h1>Python for Data Science</h1>
+  <p>Python syntax, data types, collections, conditions, loops, functions and NumPy. All code on this page was run to check its output.</p>
 
-  <article class="topic" data-id="c3-1" data-title="What is Big Data?">
-    <h3>What is Big Data?</h3>
-    <div class="key"><b>Big Data</b> = very large, complex, fast-growing or diverse datasets that traditional processing methods may struggle to handle.</div>
-    <p>It is not only about size. Data can also be big because it arrives very fast, comes in many forms or is hard to trust.</p>
-    <div class="ur"><b class="t">اردو مثال</b>واٹس ایپ پر ہر سیکنڈ لاکھوں پیغامات (حجم)، بہت تیزی سے (رفتار)، متن، تصویر، آواز اور ویڈیو (اقسام)، کچھ جعلی اکاؤنٹس (سچائی) اور اس سے اشتہارات کا فائدہ (قدر)۔</div>
+  <article class="topic" data-id="c2-1" data-title="Python introduction, syntax and Google Colab">
+    <h3>Python introduction, syntax and Google Colab</h3>
+    <div class="key">Python is a readable programming language. <b>Indentation</b> (spaces at the start of a line) shows which lines belong together. <b>#</b> starts a comment.</div>
+    <ul><li><b>Google Colab</b> gives free Python notebooks in the browser, with nothing to install (Lab 1).</li><li>The notes call Python “a full workshop”: you can build anything with libraries like pandas, seaborn and scikit-learn.</li></ul>
+    <pre class="code" data-expect="Hello, Data Science&#10;Hello Ali">print("Hello, Data Science")
+# this line is a comment
+name = "Ali"
+print("Hello", name)</pre>
+    <p class="muted">Output: Hello, Data Science / Hello Ali.</p>
+    <button class="b alt" data-lab="judge">🐍 Practise in the Python judge</button>
   </article>
 
-  <article class="topic" data-id="c3-2" data-title="The 5 Vs">
-    <h3>The 5 Vs</h3>
-    <div class="scroll"><table><tr><th>V</th><th>Question it answers</th><th>Meaning</th><th>Example</th></tr>
-     <tr><td><b>Volume</b></td><td>How much?</td><td>Amount of data</td><td>Terabytes, petabytes</td></tr>
-     <tr><td><b>Velocity</b></td><td>How fast?</td><td>Speed at which data is generated and processed</td><td>Real-time data, stock ticks</td></tr>
-     <tr><td><b>Variety</b></td><td>How many forms?</td><td>Different types: structured, semi-structured, unstructured</td><td>Tables, JSON, images, audio</td></tr>
-     <tr><td><b>Veracity</b></td><td>How trustworthy?</td><td>Accuracy and reliability of the data</td><td>Fake accounts, wrong records</td></tr>
-     <tr><td><b>Value</b></td><td>How useful?</td><td>Business insight obtained from data</td><td>Higher sales, fewer frauds</td></tr></table></div>
-    <div class="key">Memory trick: <b>much – fast – forms – trust – use</b>.</div>
-    <div class="warn">In the notes' last line the term “accuracy and trustworthiness” belongs to <b>Veracity</b> (not Velocity).</div>
-    <button class="b alt" data-go="scenarios">🧩 Practise the 5 Vs in Scenarios</button>
-  </article>
-
-  <div class="card"><b>📝 Mid-exam style questions (Topic 3)</b>
-    <details><summary>What is Big Data? Explain the 5 Vs with examples.</summary>Big data = very large, complex, fast or diverse data that traditional methods struggle with. Volume (petabytes), Velocity (real-time streams), Variety (tables, text, images), Veracity (trustworthiness), Value (business insight).</details>
-  </div>
-</section>
-
-<!-- ============================ TOPIC 4 ============================ -->
-<section class="page" id="c4">
-  <h1>Data types</h1>
-  <p>How data is organised (structure) and what kind each variable is.</p>
-
-  <article class="topic" data-id="c4-1" data-title="Structured, semi-structured and unstructured data">
-    <h3>Structured, semi-structured and unstructured data</h3>
-    <div class="scroll"><table><tr><th></th><th>Structured</th><th>Semi-structured</th><th>Unstructured</th></tr>
-     <tr><td><b>Shape</b></td><td>Fixed rows and columns</td><td>Flexible, uses keys / tags</td><td>No predefined table</td></tr>
-     <tr><td><b>Examples</b></td><td>SQL tables, bank or student database</td><td>JSON, XML</td><td>Images, text, audio, video</td></tr>
-     <tr><td><b>Typical tools</b></td><td>SQL, spreadsheets</td><td>JSON/XML parsers, APIs</td><td>Image / text / audio processing</td></tr></table></div>
-    <p>Example of unstructured data use: digital image processing, like the filters in Snapchat.</p>
-    <div class="ur"><b class="t">اردو مثال</b>اسکول کا داخلہ رجسٹر (خانوں والا) ساختہ ڈیٹا ہے، کسی ایپ کی JSON فائل نیم ساختہ ہے اور موبائل میں رکھی تصویریں اور وائس نوٹس غیر ساختہ ڈیٹا ہیں۔</div>
-  </article>
-
-  <article class="topic" data-id="c4-2" data-title="Types of variables">
-    <h3>Types of variables</h3>
+  <article class="topic" data-id="c2-2" data-title="Variables and data types">
+    <h3>Variables and data types</h3>
     <div class="scroll"><table><tr><th>Type</th><th>Meaning</th><th>Example</th></tr>
-     <tr><td><b>Numerical: discrete</b></td><td>Counted whole numbers</td><td>Number of students</td></tr>
-     <tr><td><b>Numerical: continuous</b></td><td>Measured on a scale</td><td>Height, temperature</td></tr>
-     <tr><td><b>Categorical: nominal</b></td><td>Labels with <b>no</b> order</td><td>City, product category</td></tr>
-     <tr><td><b>Categorical: ordinal</b></td><td>Labels with a <b>meaningful order</b></td><td>Low / medium / high</td></tr>
-     <tr><td><b>Boolean</b></td><td>True/False or 1/0</td><td>Owns a laptop</td></tr>
-     <tr><td><b>Text</b></td><td>Natural-language strings</td><td>Reviews</td></tr>
-     <tr><td><b>Date/time</b></td><td>Dates, timestamps, durations</td><td>Order time</td></tr></table></div>
-    <div class="key">Exam focus: nominal has <b>no</b> natural order; ordinal <b>has</b> a meaningful order.</div>
+     <tr><td><b>int</b></td><td>whole number</td><td class="code">20</td></tr>
+     <tr><td><b>float</b></td><td>number with a decimal point</td><td class="code">1.75</td></tr>
+     <tr><td><b>str</b></td><td>text</td><td class="code">"Sara"</td></tr>
+     <tr><td><b>bool</b></td><td>True or False</td><td class="code">True</td></tr></table></div>
+    <pre class="code" data-expect="&lt;class 'int'&gt; &lt;class 'float'&gt; &lt;class 'str'&gt; &lt;class 'bool'&gt;">age = 20
+height = 1.75
+name = "Sara"
+passed = True
+print(type(age), type(height), type(name), type(passed))</pre>
+    <p class="muted">type() tells you the data type of a variable.</p>
   </article>
 
-  <div class="card"><b>📝 Mid-exam style questions (Topic 4)</b>
-    <details><summary>Differentiate structured, semi-structured and unstructured data.</summary>Structured: fixed table (SQL). Semi-structured: flexible keys/tags (JSON, XML). Unstructured: no table form (images, text, audio).</details>
-    <details><summary>Nominal vs ordinal data?</summary>Both categorical; ordinal has a meaningful order (low/medium/high), nominal does not (city).</details>
+  <article class="topic" data-id="c2-3" data-title="Collections: list, tuple, set, dictionary">
+    <h3>Collections: list, tuple, set, dictionary</h3>
+    <div class="scroll"><table><tr><th>Collection</th><th>Written</th><th>Ordered?</th><th>Changeable?</th><th>Notes</th></tr>
+     <tr><td><b>list</b></td><td class="code">[78, 91, 55]</td><td>yes</td><td>yes</td><td>duplicates allowed; index from 0</td></tr>
+     <tr><td><b>tuple</b></td><td class="code">(31.5, 74.3)</td><td>yes</td><td>no</td><td>fixed once created</td></tr>
+     <tr><td><b>set</b></td><td class="code">{1, 2, 3}</td><td>no</td><td>yes</td><td>only unique items</td></tr>
+     <tr><td><b>dictionary</b></td><td class="code">{"name": "Ali"}</td><td>keeps insertion order</td><td>yes</td><td>key → value; keys are unique</td></tr></table></div>
+    <pre class="code" data-expect="78 55&#10;Ali&#10;3">marks = [78, 91, 55]
+print(marks[0], marks[-1])
+student = {"name": "Ali", "marks": 78}
+print(student["name"])
+print(len(set([1, 2, 2, 3])))</pre>
+    <p class="muted">Index 0 is the first item and -1 is the last. A set removes the repeated 2.</p>
+    <button class="b alt" data-go="scenarios">🧩 Practise collections in Scenarios</button>
+  </article>
+
+  <article class="topic" data-id="c2-4" data-title="Operators and conditions">
+    <h3>Operators and conditions</h3>
+    <ul><li><b>Arithmetic:</b> + − * / and <span class="code">//</span> (whole division), <span class="code">%</span> (remainder), <span class="code">**</span> (power).</li><li><b>Comparison:</b> == != &gt; &lt; &gt;= &lt;=</li><li><b>Logical:</b> and, or, not</li></ul>
+    <pre class="code" data-expect="B&#10;3 1 8">marks = 72
+if marks >= 80:
+    print("A")
+elif marks >= 60:
+    print("B")
+else:
+    print("C")
+print(7 // 2, 7 % 2, 2 ** 3)</pre>
+    <p class="muted">72 is not ≥ 80 but is ≥ 60, so it prints B. 7 // 2 = 3, 7 % 2 = 1, 2 ** 3 = 8.</p>
+  </article>
+
+  <article class="topic" data-id="c2-5" data-title="Loops and functions">
+    <h3>Loops and functions</h3>
+    <ul><li><b>for</b> repeats over a sequence (a list, or <span class="code">range(1, 5)</span> = 1, 2, 3, 4).</li><li><b>while</b> repeats while a condition stays True. Make sure it can end!</li><li><b>Functions</b> (<span class="code">def</span>) package reusable code; <span class="code">return</span> sends back a result.</li></ul>
+    <pre class="code" data-expect="6 4.0&#10;3">total = 0
+for v in [1, 2, 3]:
+    total += v
+
+def average(nums):
+    return sum(nums) / len(nums)
+
+print(total, average([2, 4, 6]))
+count = 0
+while count < 3:
+    count += 1
+print(count)</pre>
+    <div class="key">Your homework task: a Python program using <b>an array, a loop, conditions and a calculator</b>. Try the exercises in the Python judge.</div>
+    <button class="b alt" data-lab="judge">🐍 Open the Python judge</button>
+  </article>
+
+  <article class="topic" data-id="c2-6" data-title="NumPy: arrays and operations">
+    <h3>NumPy: arrays and operations</h3>
+    <div class="key">NumPy is the library for <b>numerical computing</b>. Its array holds numbers of one type and does maths on <b>all elements at once</b>.</div>
+    <pre class="code" data-expect="[20 40 60 80]&#10;25.0 25.0 100 10 40&#10;[20 30]">import numpy as np
+a = np.array([10, 20, 30, 40])
+print(a * 2)
+print(a.mean(), np.median(a), a.sum(), a.min(), a.max())
+print(a[1:3])</pre>
+    <p class="muted">Key functions from your notes: np.array(), np.mean(), np.dot(). Install with <span class="code">pip install numpy</span>. Slicing a[1:3] gives items at index 1 and 2.</p>
+    <div class="scroll"><table><tr><th></th><th>Python list</th><th>NumPy array</th></tr>
+     <tr><td>Types</td><td>can mix types</td><td>one type (fast, compact)</td></tr>
+     <tr><td><span class="code">+</span></td><td>joins lists: [1, 2] + [3] → [1, 2, 3]</td><td>adds element-wise: np.array([1, 2]) + 3 → [4 5]</td></tr>
+     <tr><td><span class="code">* 2</span></td><td>repeats the list</td><td>doubles every element</td></tr>
+     <tr><td>Maths</td><td>needs loops</td><td>vectorised: one expression, many numbers</td></tr></table></div>
+    <pre class="code" data-expect="[1, 2, 3]&#10;[4 5]">import numpy as np
+print([1, 2] + [3])
+print(np.array([1, 2]) + 3)</pre>
+    <button class="b alt" data-go="scenarios">🧩 Practise list vs array</button>
+  </article>
+
+  <article class="topic" data-id="c2-7" data-title="Python libraries for Data Science">
+    <h3>Python libraries for Data Science</h3>
+    <div class="scroll"><table><tr><th>Library</th><th>Purpose</th><th>Key functions (from your notes)</th></tr>
+     <tr><td><b>NumPy</b></td><td>Numerical computing, arrays</td><td class="code">np.array(), np.mean(), np.dot()</td></tr>
+     <tr><td><b>Pandas</b></td><td>Data manipulation, DataFrames</td><td class="code">pd.read_csv(), df.groupby(), df.merge()</td></tr>
+     <tr><td><b>Matplotlib</b></td><td>Basic plotting</td><td class="code">plt.plot(), plt.bar(), plt.scatter(), plt.show()</td></tr>
+     <tr><td><b>Seaborn</b></td><td>Statistical visualisation</td><td class="code">sns.heatmap(), sns.boxplot(), sns.pairplot()</td></tr>
+     <tr><td><b>Scikit-learn</b></td><td>Machine learning</td><td class="code">train_test_split()</td></tr></table></div>
+    <div class="key">NumPy = numerical · Pandas = data · Matplotlib / Seaborn = visualisation · Scikit-learn = ML.</div>
+  </article>
+
+  <div class="card"><b>📝 Mid-exam style questions (Week 2)</b>
+    <details><summary>List the Python data types and collections.</summary>Types: int, float, str, bool. Collections: list (ordered, changeable), tuple (ordered, fixed), set (unique items), dictionary (key → value).</details>
+    <details><summary>Why use NumPy arrays instead of lists for numerical work?</summary>Arrays hold one type, are faster and support vectorised operations (a * 2, a.mean()) without loops.</details>
+    <details><summary>Write a function that returns the average of a list.</summary>def average(nums): return sum(nums) / len(nums)</details>
   </div>
 </section>
 
-<!-- ============================ TOPIC 5 ============================ -->
-<section class="page" id="c5">
-  <h1>Data acquisition</h1>
-  <p>Where data comes from and how to judge whether it is good enough.</p>
+<!-- ============================ TOPIC 3 / WEEK 3 ============================ -->
+<section class="page" id="c3">
+  <h1>Data Acquisition</h1>
+  <p>Where data comes from, in what form, and how to judge whether it is good enough.</p>
 
-  <article class="topic" data-id="c5-1" data-title="What is data acquisition?">
+  <article class="topic" data-id="c3-1" data-title="What is data acquisition?">
     <h3>What is data acquisition?</h3>
     <div class="key">Data acquisition = <b>obtaining data</b> from relevant sources for analysis. Data itself is <b>raw facts and figures</b>.</div>
     <p>Forms of data (from your notes): <b>pictorial</b> (images), <b>textual</b> (words) and <b>digital</b> (stored electronically).</p>
-    <p>Sources: databases, APIs, CSV / Excel / JSON files, websites, sensors, surveys, logs and cloud systems.</p>
+    <p><b>Why it matters:</b> the quality of the analysis can never be better than the quality of the data you start with.</p>
   </article>
 
-  <article class="topic" data-id="c5-2" data-title="Primary and secondary data">
+  <article class="topic" data-id="c3-2" data-title="Primary and secondary data">
     <h3>Primary and secondary data</h3>
     <div class="scroll"><table><tr><th></th><th>Primary data</th><th>Secondary data</th></tr>
      <tr><td><b>Meaning</b></td><td>Collected <b>directly</b> for the current purpose</td><td>Already collected by someone else</td></tr>
@@ -246,13 +302,44 @@ print(df.isnull().sum())</pre>
     <div class="ur"><b class="t">اردو مثال</b>آپ خود طلبہ سے سوالنامہ بھروائیں تو یہ بنیادی (primary) ڈیٹا ہے۔ اگر آپ حکومت کی شائع کردہ مردم شماری کا ڈیٹا ڈاؤن لوڈ کریں تو یہ ثانوی (secondary) ہے۔</div>
   </article>
 
-  <article class="topic" data-id="c5-3" data-title="Concerns when acquiring data">
+  <article class="topic" data-id="c3-3" data-title="Structured, semi-structured and unstructured data">
+    <h3>Structured, semi-structured and unstructured data</h3>
+    <div class="scroll"><table><tr><th></th><th>Structured</th><th>Semi-structured</th><th>Unstructured</th></tr>
+     <tr><td><b>Shape</b></td><td>Fixed rows and columns</td><td>Flexible, uses keys / tags</td><td>No predefined table</td></tr>
+     <tr><td><b>Examples</b></td><td>SQL tables, student or bank database</td><td>JSON, XML</td><td>Images, text, audio, video</td></tr>
+     <tr><td><b>Typical tools</b></td><td>SQL, spreadsheets</td><td>JSON/XML parsers, APIs</td><td>Image / text / audio processing</td></tr></table></div>
+    <p>Example of unstructured data use: digital image processing, like the filters in Snapchat.</p>
+    <div class="ur"><b class="t">اردو مثال</b>اسکول کا داخلہ رجسٹر (خانوں والا) ساختہ ڈیٹا ہے، کسی ایپ کی JSON فائل نیم ساختہ ہے اور موبائل میں رکھی تصویریں اور وائس نوٹس غیر ساختہ ڈیٹا ہیں۔</div>
+  </article>
+
+  <article class="topic" data-id="c3-4" data-title="Data formats and sources: CSV, Excel, JSON, databases, APIs">
+    <h3>Data formats and sources: CSV, Excel, JSON, databases, APIs</h3>
+    <div class="scroll"><table><tr><th>Source</th><th>What it is</th><th>Reading it in Python</th></tr>
+     <tr><td><b>CSV</b></td><td>Plain-text table, values separated by commas (sales records)</td><td class="code">pd.read_csv("file.csv")</td></tr>
+     <tr><td><b>Excel</b></td><td>Workbook with one or more sheets</td><td class="code">pd.read_excel("file.xlsx")</td></tr>
+     <tr><td><b>JSON</b></td><td>Key-value data, common in web responses</td><td class="code">json.loads(text) or pd.read_json()</td></tr>
+     <tr><td><b>Database</b></td><td>Organised tables queried with SQL (customer records)</td><td>SQL query, e.g. <span class="code">SELECT * FROM students</span></td></tr>
+     <tr><td><b>API</b></td><td>A web service that replies with data (often JSON) when your program asks</td><td>send a request, then read the JSON reply</td></tr></table></div>
+    <pre class="code" data-expect="80&#10;(2, 2)">import json
+text = '{"name": "Ali", "marks": [70, 80]}'
+data = json.loads(text)
+print(data["marks"][1])
+
+import pandas as pd
+from io import StringIO
+csv = "name,marks\nAli,78\nSara,91"
+df = pd.read_csv(StringIO(csv))
+print(df.shape)</pre>
+    <p class="muted">json.loads turns JSON text into a dictionary. read_csv turns CSV text into a DataFrame with 2 rows and 2 columns (shape (2, 2)).</p>
+  </article>
+
+  <article class="topic" data-id="c3-5" data-title="Concerns when acquiring data">
     <h3>Concerns when acquiring data</h3>
     <ul><li><b>Permission:</b> do you have the right to use it (terms of use, consent)?</li><li><b>Privacy:</b> protect personal details.</li><li><b>Quality:</b> accurate, complete, consistent?</li><li><b>Relevance and reliability:</b> does it answer your question, and can you trust the source?</li><li><b>Cost and format:</b> can you afford and read it?</li><li><b>Collection bias:</b> does the sample represent everyone?</li></ul>
     <button class="b alt" data-go="scenarios">🧩 Scenario: scraping reviews</button>
   </article>
 
-  <article class="topic" data-id="c5-4" data-title="Data quality dimensions">
+  <article class="topic" data-id="c3-6" data-title="Data quality dimensions">
     <h3>Data quality dimensions</h3>
     <div class="scroll"><table><tr><th>Dimension</th><th>Question</th><th>Example problem</th></tr>
      <tr><td><b>Accuracy</b></td><td>Is it correct?</td><td>Age = 250</td></tr>
@@ -263,189 +350,398 @@ print(df.isnull().sum())</pre>
      <tr><td><b>Timeliness</b></td><td>Is it up to date?</td><td>Last year's prices</td></tr></table></div>
   </article>
 
-  <div class="card"><b>📝 Mid-exam style questions (Topic 5)</b>
-    <details><summary>What is data acquisition? Explain primary and secondary data.</summary>Obtaining data from relevant sources. Primary data is collected directly for the current purpose (surveys, interviews, experiments, sensors). Secondary data was collected earlier by others (repositories, databases, government datasets). Mention concerns: permission, privacy, quality, bias.</details>
+  <div class="card"><b>📝 Mid-exam style questions (Week 3)</b>
+    <details><summary>What is data acquisition? Explain primary and secondary data.</summary>Obtaining data from relevant sources. Primary data is collected directly for the current purpose (surveys, interviews, experiments, sensors). Secondary data was collected earlier by others (repositories, databases, government datasets).</details>
+    <details><summary>Differentiate structured, semi-structured and unstructured data.</summary>Structured: fixed table (SQL). Semi-structured: flexible keys/tags (JSON, XML). Unstructured: no table form (images, text, audio).</details>
+    <details><summary>Name the data quality dimensions.</summary>Accuracy, completeness, consistency, validity, uniqueness, timeliness.</details>
   </div>
 </section>
 
-<!-- ============================ TOPIC 6 ============================ -->
-<section class="page" id="c6">
-  <h1>Statistics for Data Science</h1>
-  <p>Describing data, the bell curve, hypothesis testing and correlation.</p>
+<!-- ============================ TOPIC 4 / WEEK 4 ============================ -->
+<section class="page" id="c4">
+  <h1>Data Cleaning</h1>
+  <p>Missing values, duplicates, inconsistent data, outliers, encoding and scaling. Raw data is almost never ready to use.</p>
 
-  <article class="topic" data-id="c6-1" data-title="Descriptive statistics">
+  <article class="topic" data-id="c4-1" data-title="What is data cleaning? The workflow">
+    <h3>What is data cleaning? The workflow</h3>
+    <div class="key">Data cleaning = detecting and correcting <b>inaccurate, incomplete, inconsistent, duplicate or irrelevant</b> data. Notes: fix weak or missing data; incorrect and duplicate values.</div>
+    <ol class="steps"><li><b>Inspect</b> the data (shape, info, describe, null check).</li><li>Remove <b>duplicates</b>.</li><li>Handle <b>missing values</b>.</li><li>Fix <b>types</b> and <b>inconsistent</b> values (spelling, case, units).</li><li>Investigate <b>outliers</b>.</li><li><b>Encode</b> categories and <b>scale</b> numbers if the model needs it.</li><li><b>Check again</b>.</li></ol>
+    <div class="key">Exam focus: cleaning is <b>not</b> simply deleting bad rows. First understand <i>why</i> a value is missing, wrong or unusual.</div>
+    <div class="ur"><b class="t">اردو مثال</b>رجسٹر میں ایک طالب علم کا نام دو بار لکھا ہے (ڈپلیکیٹ)، کسی کے نمبر خالی ہیں، 'Lahore' اور 'lahore' الگ لکھے ہیں اور کسی کی عمر 250 لکھی ہے۔ صفائی میں ان سب کو دیکھ کر ٹھیک کیا جاتا ہے۔</div>
+    <button class="b alt" data-lab="clean">🧪 Open the Data cleaning lab</button>
+  </article>
+
+  <article class="topic" data-id="c4-2" data-title="Missing values">
+    <h3>Missing values</h3>
+    <div class="scroll"><table><tr><th>Method</th><th>Use when</th></tr>
+     <tr><td><b>Delete rows</b></td><td>Very few rows are missing and the loss is small</td></tr>
+     <tr><td><b>Delete the column</b></td><td>Most of its values are missing</td></tr>
+     <tr><td><b>Fill with the mean</b></td><td>Numeric data without strong outliers</td></tr>
+     <tr><td><b>Fill with the median</b></td><td>Numeric data with outliers or skew</td></tr>
+     <tr><td><b>Fill with the mode</b></td><td>Categorical data (most frequent value)</td></tr></table></div>
+    <p>Filling gaps with an estimate is called <b>imputation</b>.</p>
+    <pre class="code" data-expect="1&#10;[70.0, 80.0, 90.0, 80.0]">import pandas as pd
+s = pd.Series([70, None, 90, 80])
+print(s.isnull().sum())
+print(s.fillna(s.mean()).tolist())</pre>
+    <p class="muted">One value is missing; the mean of 70, 90 and 80 is 80, so the gap becomes 80.0.</p>
+  </article>
+
+  <article class="topic" data-id="c4-3" data-title="Duplicates and inconsistent data">
+    <h3>Duplicates and inconsistent data</h3>
+    <ul><li><b>Duplicates:</b> the same record twice. <span class="code">df.drop_duplicates()</span> keeps the first copy.</li><li><b>Inconsistent values:</b> “Lahore”, “lahore ” and “LAHORE” are the same city written differently. Standardise spaces, case, units and spelling.</li></ul>
+    <pre class="code" data-expect="['Lahore', 'Lahore', 'Karachi', 'Lahore']&#10;2">import pandas as pd
+df = pd.DataFrame({"city": ["Lahore", "lahore ", "Karachi", "Lahore"]})
+df["city"] = df["city"].str.strip().str.title()
+print(df["city"].tolist())
+print(len(df.drop_duplicates()))</pre>
+    <p class="muted">After cleaning the text, only two distinct rows remain (Lahore, Karachi). Clean the text <b>before</b> looking for duplicates.</p>
+  </article>
+
+  <article class="topic" data-id="c4-4" data-title="Outliers">
+    <h3>Outliers</h3>
+    <div class="key">An <b>outlier</b> is a value far from the others. <b>Detect</b> it, then <b>investigate</b>: is it an error (fix it) or a real rare value (keep it)?</div>
+    <p><b>IQR rule:</b> outlier if the value is below <b>Q1 − 1.5×IQR</b> or above <b>Q3 + 1.5×IQR</b>, where IQR = Q3 − Q1. Another idea: a very large |z-score| (for example above 3).</p>
+    <pre class="code" data-expect="34.25 41.25 [160]">import pandas as pd
+s = pd.Series([30, 32, 35, 36, 38, 40, 45, 160])
+q1, q3 = s.quantile(0.25), s.quantile(0.75)
+iqr = q3 - q1
+print(q1, q3, s[(s < q1 - 1.5*iqr) | (s > q3 + 1.5*iqr)].tolist())</pre>
+    <p class="muted">Q1 = 34.25, Q3 = 41.25, IQR = 7, upper fence = 51.75, so 160 is an outlier.</p>
+    <button class="b alt" data-lab="stats">🧪 Open the Descriptive stats lab (box plot)</button>
+  </article>
+
+  <article class="topic" data-id="c4-5" data-title="Variable types and categorical encoding">
+    <h3>Variable types and categorical encoding</h3>
+    <div class="scroll"><table><tr><th>Type</th><th>Meaning</th><th>Example</th></tr>
+     <tr><td><b>Numerical: discrete</b></td><td>Counted whole numbers</td><td>Number of students</td></tr>
+     <tr><td><b>Numerical: continuous</b></td><td>Measured on a scale</td><td>Height, temperature</td></tr>
+     <tr><td><b>Categorical: nominal</b></td><td>Labels with <b>no</b> order</td><td>City, product category</td></tr>
+     <tr><td><b>Categorical: ordinal</b></td><td>Labels with a <b>meaningful order</b></td><td>Low / medium / high</td></tr>
+     <tr><td><b>Boolean</b></td><td>True/False or 1/0</td><td>Owns a laptop</td></tr></table></div>
+    <div class="key">Models need numbers. <b>Label encoding</b> gives each category a number (use for <b>ordinal</b> data). <b>One-hot encoding</b> makes a 0/1 column per category (use for <b>nominal</b> data, so no false order appears).</div>
+    <pre class="code" data-expect="['Karachi', 'Lahore']">import pandas as pd
+df = pd.DataFrame({"city": ["Lahore", "Karachi", "Lahore"]})
+print(pd.get_dummies(df["city"], dtype=int).columns.tolist())</pre>
+    <button class="b alt" data-lab="scale">🧪 Open the Scaling &amp; encoding lab</button>
+  </article>
+
+  <article class="topic" data-id="c4-6" data-title="Feature scaling: normalisation and standardisation">
+    <h3>Feature scaling: normalisation and standardisation</h3>
+    <div class="key"><b>Min-max normalisation:</b> (x − min) / (max − min) → values from 0 to 1.<br><b>Standardisation (z-score):</b> (x − mean) / SD → mean 0, SD 1.</div>
+    <p><b>Worked example</b> with 20, 30, 40, 50, 100 (min 20, max 100, mean 48, SD ≈ 27.86): the age 40 scales to (40 − 20) / 80 = 0.25; the age 100 has z = (100 − 48) / 27.86 = 1.87.</p>
+    <pre class="code" data-expect="[0.0, 0.125, 0.25, 0.375, 1.0]&#10;48.0 27.86 1.87">x = [20, 30, 40, 50, 100]
+lo, hi = min(x), max(x)
+print([round((v - lo) / (hi - lo), 3) for v in x])
+mean = sum(x) / len(x)
+sd = (sum((v - mean) ** 2 for v in x) / len(x)) ** 0.5
+print(round(mean, 1), round(sd, 2), round((100 - mean) / sd, 2))</pre>
+    <div class="warn"><b>Data leakage:</b> learn the min, max, mean and SD (and imputation values) from the <b>training data only</b>, then apply them to the test data.</div>
+    <div class="ur"><b class="t">اردو مثال</b>عمر 20 سے 100 تک اور تنخواہ لاکھوں میں ہو تو بڑے عدد والا فیچر ماڈل پر غالب آ جاتا ہے۔ اسکیلنگ سے سب کو ایک جیسے پیمانے پر لایا جاتا ہے۔</div>
+  </article>
+
+  <div class="card"><b>📝 Mid-exam style questions (Week 4)</b>
+    <details><summary>What is data cleaning? List common problems and fixes.</summary>Detecting and correcting inaccurate, incomplete, inconsistent, duplicate or irrelevant data. Missing values (remove or impute), duplicates (remove), inconsistent values (standardise), outliers (investigate), invalid values (check rules).</details>
+    <details><summary>Label encoding vs one-hot encoding?</summary>Label: one number per category, suits ordinal data. One-hot: one 0/1 column per category, suits nominal data.</details>
+    <details><summary>Min-max normalisation vs standardisation?</summary>Min-max rescales to 0–1 using (x−min)/(max−min). Standardisation gives mean 0 and SD 1 using (x−mean)/SD. Learn the parameters from training data only.</details>
+  </div>
+</section>
+
+<!-- ============================ TOPIC 5 / WEEK 5 ============================ -->
+<section class="page" id="c5">
+  <h1>Pandas &amp; Data Manipulation</h1>
+  <p>Series and DataFrames, reading and inspecting data, filtering, sorting, groupby, aggregation, merge and join.</p>
+
+  <article class="topic" data-id="c5-1" data-title="Pandas introduction: Series and DataFrame">
+    <h3>Pandas introduction: Series and DataFrame</h3>
+    <div class="key"><b>Pandas</b> is the main Python library for data manipulation. A <b>Series</b> is one labelled column; a <b>DataFrame</b> is a table of rows and columns.</div>
+    <pre class="code" data-expect="91&#10;(2, 2)">import pandas as pd
+s = pd.Series([78, 91, 55], index=["Ali", "Sara", "Usman"])
+print(s["Sara"])
+df = pd.DataFrame({"name": ["Ali", "Sara"], "marks": [78, 91]})
+print(df.shape)</pre>
+    <p class="muted">s["Sara"] looks up the value by label. df.shape is (rows, columns) = (2, 2).</p>
+    <button class="b alt" data-lab="pandas">🧪 Open the Pandas explorer</button>
+  </article>
+
+  <article class="topic" data-id="c5-2" data-title="Reading and inspecting data">
+    <h3>Reading and inspecting data</h3>
+    <div class="scroll"><table><tr><th>Task</th><th>Call</th></tr>
+     <tr><td>Read a CSV / Excel file</td><td class="code">pd.read_csv("f.csv"), pd.read_excel("f.xlsx")</td></tr>
+     <tr><td>First rows</td><td class="code">df.head()</td></tr>
+     <tr><td>Columns, types, non-null counts</td><td class="code">df.info()</td></tr>
+     <tr><td>Summary statistics</td><td class="code">df.describe()</td></tr>
+     <tr><td>Number of rows and columns</td><td class="code">df.shape</td></tr>
+     <tr><td>Missing values per column</td><td class="code">df.isnull().sum()</td></tr>
+     <tr><td>Remove repeated rows</td><td class="code">df.drop_duplicates()</td></tr></table></div>
+    <pre class="code" data-expect="(3, 2)&#10;{'name': 1, 'marks': 0}">import pandas as pd
+df = pd.DataFrame({"name": ["Ali", "Sara", None], "marks": [78, 91, 55]})
+print(df.shape)
+print(df.isnull().sum().to_dict())</pre>
+    <p class="muted">3 rows and 2 columns; the name column has 1 missing value.</p>
+  </article>
+
+  <article class="topic" data-id="c5-3" data-title="Filtering and sorting">
+    <h3>Filtering and sorting</h3>
+    <div class="key"><b>Filtering</b> keeps rows where a condition is True: <span class="code">df[df["marks"] &gt; 60]</span>. <b>Sorting</b> orders rows: <span class="code">df.sort_values("marks", ascending=False)</span>.</div>
+    <pre class="code" data-expect="['Ali', 'Sara']&#10;['Sara', 'Ali', 'Usman']">import pandas as pd
+df = pd.DataFrame({"name": ["Ali", "Sara", "Usman"], "marks": [78, 91, 55]})
+print(df[df["marks"] > 60]["name"].tolist())
+print(df.sort_values("marks", ascending=False)["name"].tolist())</pre>
+    <p class="muted">Only Ali (78) and Sara (91) pass the filter; sorted high to low gives Sara, Ali, Usman.</p>
+  </article>
+
+  <article class="topic" data-id="c5-4" data-title="GroupBy and aggregation">
+    <h3>GroupBy and aggregation</h3>
+    <div class="key"><b>groupby</b> = split the rows into groups, apply a function to each group, combine the results.</div>
+    <ul><li>Common aggregations: <b>sum, mean, count, min, max</b>.</li><li>Group keys come out sorted by default.</li></ul>
+    <pre class="code" data-expect="{'Karachi': 91.0, 'Lahore': 75.0}">import pandas as pd
+df = pd.DataFrame({"city": ["Lahore", "Karachi", "Lahore"], "marks": [78, 91, 72]})
+print(df.groupby("city")["marks"].mean().to_dict())</pre>
+    <p class="muted">Lahore: (78 + 72) / 2 = 75.0. Karachi: 91.0.</p>
+  </article>
+
+  <article class="topic" data-id="c5-5" data-title="Merge and join">
+    <h3>Merge and join</h3>
+    <div class="key"><b>merge</b> combines two tables through shared <b>key columns</b>. <b>join</b> combines tables aligning on the <b>index</b> by default. Both support several join types.</div>
+    <div class="scroll"><table><tr><th>Join type</th><th>Keeps</th></tr>
+     <tr><td><b>inner</b> (default for merge)</td><td>only rows whose key is in both tables</td></tr>
+     <tr><td><b>left</b></td><td>all rows of the left table, matched rows of the right</td></tr>
+     <tr><td><b>right</b></td><td>all rows of the right table, matched rows of the left</td></tr>
+     <tr><td><b>outer</b></td><td>all rows from both tables</td></tr></table></div>
+    <pre class="code" data-expect="['Punjab', 'Sindh']">import pandas as pd
+a = pd.DataFrame({"city": ["Lahore", "Karachi"], "marks": [75, 91]})
+b = pd.DataFrame({"city": ["Lahore", "Karachi"], "province": ["Punjab", "Sindh"]})
+print(a.merge(b, on="city")["province"].tolist())</pre>
+  </article>
+
+  <article class="topic" data-id="c5-6" data-title="Data manipulation overview">
+    <h3>Data manipulation overview</h3>
+    <div class="key">Manipulation = <b>transforming and organising</b> data so it can be analysed. Cleaning fixes quality problems; manipulation reshapes data for analysis.</div>
+    <ul><li>Filtering rows, selecting or removing columns</li><li>Sorting values</li><li>Grouping and aggregation (sum, mean, count)</li><li>Merging / joining datasets</li><li>Creating calculated (derived) columns, changing data types</li></ul>
+    <p><b>Order in a project (notes):</b> acquisition (get data) → cleaning (fix quality) → manipulation (Pandas) → visualisation (charts and graphs).</p>
+    <button class="b alt" data-go="scenarios">🧩 Practise the Pandas scenarios</button>
+  </article>
+
+  <div class="card"><b>📝 Mid-exam style questions (Week 5)</b>
+    <details><summary>Series vs DataFrame?</summary>A Series is a one-dimensional labelled array (one column); a DataFrame is a two-dimensional table of rows and columns.</details>
+    <details><summary>Explain groupby and aggregation with an example.</summary>df.groupby("city")["marks"].mean() splits rows by city, computes the mean marks for each group and combines the results.</details>
+    <details><summary>Difference between merge and join?</summary>merge combines tables on key columns; join aligns on the index by default; both support inner, left, right and outer joins.</details>
+  </div>
+</section>
+
+<!-- ============================ TOPIC 6 / WEEK 6 ============================ -->
+<section class="page" id="c6">
+  <h1>Exploratory Data Analysis (EDA)</h1>
+  <p>Looking at the data before modelling: univariate, bivariate and multivariate analysis, descriptive statistics and correlation.</p>
+
+  <article class="topic" data-id="c6-1" data-title="Meaning and purpose of EDA">
+    <h3>Meaning and purpose of EDA</h3>
+    <div class="key"><b>EDA</b> (Exploratory Data Analysis) = explore the data to find <b>patterns, problems and relationships</b> before building a model.</div>
+    <p>From your notes, EDA always starts with: <b>shape → info → describe → null check</b>.</p>
+    <div class="scroll"><table><tr><th>Step</th><th>Pandas call</th><th>Tells you</th></tr>
+     <tr><td>shape</td><td class="code">df.shape</td><td>number of rows and columns</td></tr>
+     <tr><td>info</td><td class="code">df.info()</td><td>column names, types, non-null counts</td></tr>
+     <tr><td>describe</td><td class="code">df.describe()</td><td>count, mean, std, min, quartiles, max</td></tr>
+     <tr><td>null check</td><td class="code">df.isnull().sum()</td><td>missing values per column</td></tr></table></div>
+    <pre class="code">import pandas as pd
+df = pd.read_csv("students.csv")   # needs your own file
+print(df.shape)
+df.info()
+print(df.describe())
+print(df.isnull().sum())</pre>
+    <p class="muted">This code needs a CSV file named students.csv and was not run here.</p>
+  </article>
+
+  <article class="topic" data-id="c6-2" data-title="Univariate, bivariate and multivariate analysis">
+    <h3>Univariate, bivariate and multivariate analysis</h3>
+    <div class="scroll"><table><tr><th>Type</th><th>Looks at</th><th>Examples</th><th>Typical charts</th></tr>
+     <tr><td><b>Univariate</b></td><td>one variable</td><td>mean and spread of marks; distribution of ages</td><td>histogram, box plot, bar chart</td></tr>
+     <tr><td><b>Bivariate</b></td><td>two variables together</td><td>study hours vs marks; correlation of sleep and marks</td><td>scatter plot, grouped bars</td></tr>
+     <tr><td><b>Multivariate</b></td><td>three or more variables together</td><td>correlations of marks, attendance, study hours, sleep</td><td>heatmap, pair plot</td></tr></table></div>
+    <button class="b alt" data-go="scenarios">🧩 Practise in Scenarios</button>
+  </article>
+
+  <article class="topic" data-id="c6-3" data-title="Descriptive statistics">
     <h3>Descriptive statistics</h3>
-    <div class="key">Statistics helps with <b>data collection</b> and <b>distribution</b>; Data Science uses it for <b>data analysis</b> and to <b>understand data patterns</b>.</div>
+    <div class="key">Statistics supports <b>data collection</b> and <b>distribution</b>; Data Science uses it for <b>data analysis</b> and to <b>understand data patterns</b>.</div>
     <div class="scroll"><table><tr><th>Concept</th><th>Formula</th><th>Explanation</th><th>Example</th></tr>
      <tr><td><b>Mean</b></td><td>sum / count</td><td>Average value</td><td>Average of marks</td></tr>
      <tr><td><b>Median</b></td><td>middle value (sorted)</td><td>Value in the middle</td><td>Salary with outliers</td></tr>
      <tr><td><b>Mode</b></td><td>most frequent value</td><td>Occurs most often</td><td>Fashion / surveys</td></tr>
      <tr><td><b>Variance</b></td><td>average of squared deviations</td><td>How spread out the data is</td><td>Stock volatility</td></tr>
      <tr><td><b>Std deviation</b></td><td>√variance</td><td>Average distance from the mean</td><td>Test-score spread</td></tr>
-     <tr><td><b>Correlation</b></td><td>r = Cov(X,Y) / (sx · sy)</td><td>Relationship between two variables</td><td>Height vs weight</td></tr>
-     <tr><td><b>p-value</b></td><td>probability under H0</td><td>&lt; 0.05 → result significant</td><td>Drug trial result</td></tr></table></div>
+     <tr><td><b>Range</b></td><td>max − min</td><td>Total spread</td><td>9 − 2 = 7</td></tr></table></div>
+    <pre class="code" data-expect="5.0 4.5 4 7&#10;4.0 2.0">import pandas as pd
+s = pd.Series([2, 4, 4, 4, 5, 5, 7, 9])
+print(s.mean(), s.median(), s.mode()[0], s.max() - s.min())
+print(s.var(ddof=0), s.std(ddof=0))</pre>
+    <p class="muted">mean 5, median 4.5, mode 4, range 7; population variance 4 and standard deviation 2 (ddof=0 divides by n, like the lecture definition).</p>
     <div class="ur"><b class="t">اردو مثال</b>پانچ ملازمین کی تنخواہ 30، 32، 35، 36 ہزار اور مالک کی 400 ہزار ہو تو اوسط (mean) بہت بڑھ جاتا ہے مگر درمیانی قدر (median) تقریباً ٹھیک رہتی ہے۔ اس لیے تنخواہ کے لیے median بہتر ہے۔</div>
     <button class="b alt" data-lab="stats">🧪 Open the Descriptive stats lab</button>
   </article>
 
-  <article class="topic" data-id="c6-2" data-title="Spread, range and outliers">
-    <h3>Spread, range and outliers</h3>
-    <p><b>Worked example</b> with the scores 2, 4, 4, 4, 5, 5, 7, 9:</p>
-    <ol class="steps"><li>Mean = (2+4+4+4+5+5+7+9) / 8 = 40 / 8 = <b>5</b></li>
-    <li>Squared deviations: 9, 1, 1, 1, 0, 0, 4, 16 → sum = 32</li>
-    <li>Variance = 32 / 8 = <b>4</b></li><li>Standard deviation = √4 = <b>2</b></li><li>Range = 9 − 2 = <b>7</b></li></ol>
+  <article class="topic" data-id="c6-4" data-title="Spread, quartiles and outliers">
+    <h3>Spread, quartiles and outliers</h3>
+    <ol class="steps"><li>Mean of 2, 4, 4, 4, 5, 5, 7, 9 = 40 / 8 = <b>5</b></li><li>Squared deviations: 9, 1, 1, 1, 0, 0, 4, 16 → sum = 32</li><li>Variance = 32 / 8 = <b>4</b></li><li>Standard deviation = √4 = <b>2</b></li><li>Range = 9 − 2 = <b>7</b></li></ol>
     <div class="chart-slot" data-chart='{"type":"hist","values":[2,4,4,4,5,5,7,9],"bins":4,"mean":5,"median":4.5,"xlabel":"score","title":"Scores: mean (red) and median (green)"}'></div>
-    <div class="key">The <b>mean is sensitive</b> to extreme values; the <b>median is robust</b>. An <b>outlier</b> is an unusual value: investigate it, do not delete it blindly.</div>
-    <div class="warn">Population variance divides by <b>n</b> (as in the lecture definition); when your data is only a sample, software often divides by <b>n − 1</b>.</div>
+    <div class="key">The <b>mean is sensitive</b> to extreme values; the <b>median is robust</b>. <b>Quartiles</b> split sorted data into four parts (Q1, median, Q3); <b>IQR = Q3 − Q1</b>. A box plot shows these and the outliers.</div>
+    <div class="warn">Population variance divides by <b>n</b> (as in the lecture definition). When your data is only a sample, software often divides by <b>n − 1</b>.</div>
   </article>
 
-  <article class="topic" data-id="c6-3" data-title="Normal distribution and z-score">
-    <h3>Normal distribution and z-score</h3>
-    <div class="key">The <b>normal distribution</b> is the <b>bell curve</b>: <b>68%</b> of data lies within 1 standard deviation of the mean, <b>95%</b> within 2 and <b>99.7%</b> within 3.</div>
-    <div class="chart-slot" data-chart='{"type":"normal","mu":60,"sd":10,"k":2,"xlabel":"marks","dec":0,"title":"Mean 60, SD 10: shaded = within 2 SD (about 95%)"}'></div>
-    <p><b>z-score</b> = (x − mean) / SD: how many standard deviations a value is from the mean. A mark of 80 with mean 60 and SD 10 has z = 2.</p>
-    <div class="ur"><b class="t">اردو مثال</b>کلاس کے نمبر عموماً گھنٹی کی شکل میں ہوتے ہیں: زیادہ تر طلبہ اوسط کے قریب اور بہت کم طلبہ بہت اوپر یا بہت نیچے۔</div>
-    <button class="b alt" data-lab="normal">🧪 Open the Normal curve lab</button>
-  </article>
-
-  <article class="topic" data-id="c6-4" data-title="Hypothesis testing and the p-value">
-    <h3>Hypothesis testing and the p-value</h3>
-    <div class="key"><b>Steps:</b> define H0 → define H1 → set alpha (0.05) → run the test → get the p-value → compare p with alpha → decision.</div>
-    <ul><li><b>H0 (null):</b> the default claim: no difference, no effect.</li><li><b>H1 (alternative):</b> what you suspect instead.</li><li><b>Alpha (significance level):</b> the cut-off, usually 0.05.</li><li><b>p &lt; alpha</b> → reject H0 (result significant). <b>p ≥ alpha</b> → fail to reject H0.</li></ul>
-    <div class="warn"><b>p-value</b> = the probability of a result at least this extreme <b>assuming H0 is true</b>. It is <b>not</b> the probability that H0 is true, and “fail to reject” does not prove H0.</div>
-    <div class="ur"><b class="t">اردو مثال</b>ایک کمپنی کہتی ہے کہ اس کی ڈیلیوری اوسطاً 30 منٹ میں ہوتی ہے۔ ہم نمونہ لے کر دیکھتے ہیں؛ اگر p-value 0.05 سے کم آئے تو دعوے کے خلاف مضبوط ثبوت ہے۔</div>
-    <button class="b alt" data-lab="hyp">🧪 Open the Hypothesis test lab</button>
-  </article>
-
-  <article class="topic" data-id="c6-5" data-title="Correlation vs causation">
-    <h3>Correlation vs causation</h3>
-    <div class="key">Correlation r runs from <b>−1</b> (perfect negative) through <b>0</b> (none) to <b>+1</b> (perfect positive). It shows <b>association</b>, not cause.</div>
+  <article class="topic" data-id="c6-5" data-title="Correlation and causation">
+    <h3>Correlation and causation</h3>
+    <div class="key">Correlation <b>r</b> = Cov(X, Y) / (sx · sy). It runs from <b>−1</b> (perfect negative) through <b>0</b> (none) to <b>+1</b> (perfect positive). It shows <b>association</b>, not cause.</div>
     <div class="scroll"><table><tr><th>|r|</th><th>Strength</th></tr><tr><td>0.8 – 1.0</td><td>very strong</td></tr><tr><td>0.6 – 0.8</td><td>strong</td></tr><tr><td>0.4 – 0.6</td><td>moderate</td></tr><tr><td>0.2 – 0.4</td><td>weak</td></tr><tr><td>below 0.2</td><td>very weak / none</td></tr></table></div>
+    <pre class="code" data-expect="0.993">import pandas as pd
+hours = pd.Series([1, 2, 3, 4, 5])
+marks = pd.Series([50, 55, 65, 70, 80])
+print(round(hours.corr(marks), 3))</pre>
+    <p class="muted">r = 0.993: a very strong positive relationship between study hours and marks.</p>
     <p><b>Notes example:</b> ice-cream sales and drowning both rise in hot weather: correlation exists, causation does not. Hot weather (a <b>confounder</b>) drives both.</p>
     <div class="ur"><b class="t">اردو مثال</b>گرمی میں آئس کریم بھی زیادہ بکتی ہے اور لوگ تیراکی بھی زیادہ کرتے ہیں، اس لیے ڈوبنے کے واقعات بھی بڑھتے ہیں۔ آئس کریم اور ڈوبنا ساتھ ساتھ بڑھتے ہیں (correlation) مگر ایک دوسرے کی وجہ نہیں (causation نہیں)۔</div>
     <button class="b alt" data-lab="corr">🧪 Open the Correlation lab</button>
   </article>
 
-  <article class="topic" data-id="c6-6" data-title="Probability and sampling basics">
-    <h3>Probability and sampling basics</h3>
-    <ul><li><b>Probability</b> measures how likely an event is, from 0 (impossible) to 1 (certain): P = favourable outcomes / all outcomes. Example: a fair die shows 4 with probability 1/6.</li>
-    <li><b>Population</b> = everyone you want to know about. <b>Sample</b> = the subset you actually measure.</li>
-    <li>Common sampling methods: <b>simple random</b> (everyone has an equal chance), <b>systematic</b> (every k-th item), <b>stratified</b> (random from each group), <b>cluster</b> (randomly choose whole groups).</li>
-    <li>A biased sample (for example only one city) gives misleading results.</li></ul>
-  </article>
-
-  <div class="card"><b>📝 Mid-exam style questions (Topic 6)</b>
+  <div class="card"><b>📝 Mid-exam style questions (Week 6)</b>
+    <details><summary>What is EDA and why is it done?</summary>Exploring data with statistics and charts to find patterns, problems and relationships before modelling. Start with shape, info, describe and a null check.</details>
     <details><summary>Explain mean, median, mode, variance and standard deviation.</summary>Mean = sum/count; median = middle sorted value; mode = most frequent; variance = average squared deviation; standard deviation = √variance. Mean is sensitive to outliers; median is robust.</details>
-    <details><summary>State the steps of hypothesis testing.</summary>Define H0, define H1, set alpha (0.05), run the test, find the p-value, compare with alpha, decide.</details>
     <details><summary>Correlation vs causation with an example.</summary>Ice-cream sales and drowning rise together because of hot weather; correlation does not prove one causes the other.</details>
   </div>
 </section>
 
-<!-- ============================ TOPIC 7 ============================ -->
+<!-- ============================ TOPIC 7 / WEEK 7 ============================ -->
 <section class="page" id="c7">
-  <h1>Classification metrics</h1>
-  <p>How to check how well a classification model works: confusion matrix, accuracy, precision, recall and F1.</p>
+  <h1>Data Visualization</h1>
+  <p>Why we visualise data, Matplotlib and Seaborn, which chart to choose, heatmaps and good visualisation practice.</p>
 
-  <article class="topic" data-id="c7-1" data-title="What is classification?">
-    <h3>What is classification?</h3>
-    <div class="key">Classification is a <b>supervised</b> machine-learning task that predicts a <b>categorical class or label</b>.</div>
-    <ul><li><b>Binary:</b> two classes (spam / not spam).</li><li><b>Multiclass:</b> more than two (cat / dog / bird).</li><li><b>Multilabel:</b> one item can have several labels.</li></ul>
-    <p>Examples: fraud / not fraud, positive / negative review, approved / rejected. The notes say metrics help us <b>check how well the model works</b>.</p>
+  <article class="topic" data-id="c7-1" data-title="Meaning and importance; Matplotlib">
+    <h3>Meaning and importance; Matplotlib</h3>
+    <div class="key"><b>Data visualisation</b> = representing data in graphical forms such as <b>charts and graphs</b>. Patterns, trends, outliers and relationships become easy to see and to explain.</div>
+    <pre class="code">import matplotlib.pyplot as plt
+plt.plot([1, 2, 3], [10, 20, 15])
+plt.title("Demo")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.show()</pre>
+    <p class="muted">Draws a line chart; it needs Matplotlib and shows a picture, so it is illustrative here. Key calls from your notes: plt.plot(), plt.bar(), plt.scatter(), plt.show().</p>
   </article>
 
-  <article class="topic" data-id="c7-2" data-title="The confusion matrix: TP, TN, FP, FN">
-    <h3>The confusion matrix: TP, TN, FP, FN</h3>
-    <div class="key">A confusion matrix compares <b>actual</b> classes with <b>predicted</b> classes. Read each term as: <b>(was the model right?) + (what did it predict?)</b>.</div>
-    <div class="chart-slot" data-chart='{"type":"confusion","tp":40,"tn":45,"fp":5,"fn":10}'></div>
-    <div class="scroll"><table><tr><th>Term</th><th>Meaning (fraud example from your notes)</th></tr>
-     <tr><td><b>TP</b> true positive</td><td>Model said “fraud” and it really was fraud ✔</td></tr>
-     <tr><td><b>TN</b> true negative</td><td>Model said “no fraud” and it really was genuine ✔</td></tr>
-     <tr><td><b>FP</b> false positive</td><td>Model said “fraud” but it was genuine. Also called <b>Type I error</b> (false alarm).</td></tr>
-     <tr><td><b>FN</b> false negative</td><td>Model said “no fraud” but it was fraud. Also called <b>Type II error</b> (missed case).</td></tr></table></div>
-    <p>We use <b>TP = 40, TN = 45, FP = 5, FN = 10</b> (total 100) in all worked examples below.</p>
-    <div class="ur"><b class="t">اردو مثال</b>فراڈ والا ماڈل: اگر اس نے اصلی فراڈ کو 'فراڈ' کہا تو یہ TP ہے۔ اگر اصلی لین دین کو 'فراڈ' کہہ دیا تو FP (جھوٹا الارم) ہے۔ اگر اصلی فراڈ کو 'ٹھیک' کہہ دیا تو FN (چھوٹ جانے والا کیس) ہے۔</div>
-    <button class="b alt" data-lab="confusion">🧪 Open the Confusion matrix lab</button>
+  <article class="topic" data-id="c7-2" data-title="Choosing a chart">
+    <h3>Choosing a chart</h3>
+    <div class="key"><b>Choose the chart by the question you are answering.</b></div>
+    <div class="scroll"><table><tr><th>Chart</th><th>Best used for</th><th>Example</th><th>Poor choice when</th></tr>
+     <tr><td><b>Bar chart</b></td><td>Comparing categories</td><td>Sales by product</td><td>Too many categories</td></tr>
+     <tr><td><b>Line chart</b></td><td>Trends over time</td><td>Monthly revenue</td><td>Unordered categories</td></tr>
+     <tr><td><b>Pie chart</b></td><td>Simple part-to-whole</td><td>Market share (few slices)</td><td>Many or similar slices</td></tr>
+     <tr><td><b>Histogram</b></td><td>Distribution of one numerical variable</td><td>Age distribution</td><td>Categories or two variables</td></tr>
+     <tr><td><b>Scatter plot</b></td><td>Relationship between two numbers</td><td>Study hours vs marks</td><td>Categorical variables</td></tr>
+     <tr><td><b>Box plot</b></td><td>Spread and outliers</td><td>Salary distribution</td><td>Tiny samples</td></tr>
+     <tr><td><b>Heatmap</b></td><td>Many values as colours</td><td>Correlation matrix</td><td>Only a few numbers</td></tr></table></div>
+    <div class="ur"><b class="t">اردو مثال</b>مہینہ وار آمدنی دکھانی ہو تو لائن چارٹ، مختلف دکانوں کا موازنہ ہو تو بار چارٹ، اور پڑھائی کے گھنٹے بمقابلہ نمبر ہو تو اسکیٹر پلاٹ۔</div>
+    <button class="b alt" data-lab="charts">🧪 Open the Chart chooser lab</button>
   </article>
 
-  <article class="topic" data-id="c7-3" data-title="Accuracy">
-    <h3>Accuracy</h3>
-    <div class="key">Accuracy = <b>(TP + TN) / (TP + TN + FP + FN)</b>: how many predictions were right in total (right / total).</div>
-    <p><b>Worked:</b> (40 + 45) / (40 + 45 + 5 + 10) = 85 / 100 = <b>0.85</b> (85%).</p>
-    <div class="warn"><b>Careful:</b> on <b>imbalanced</b> data accuracy can mislead. If only 10 of 1,000 transactions are fraud, a model that always says “no fraud” is 99% accurate and catches nothing.</div>
+  <article class="topic" data-id="c7-3" data-title="Seaborn and heatmaps">
+    <h3>Seaborn and heatmaps</h3>
+    <div class="key"><b>Seaborn</b> builds on Matplotlib and makes statistical charts easy: <span class="code">sns.heatmap()</span>, <span class="code">sns.boxplot()</span>, <span class="code">sns.pairplot()</span>.</div>
+    <pre class="code">import seaborn as sns
+sns.heatmap(df.corr(), annot=True)   # correlation heatmap
+sns.boxplot(x=df["salary"])          # spread and outliers
+sns.pairplot(df)                     # scatter plots of all pairs</pre>
+    <p class="muted">Illustrative: needs seaborn and your own DataFrame df.</p>
+    <p>A <b>heatmap</b> shows a table of numbers as colours. For a correlation matrix, each cell is r between two variables; strong positive or negative cells stand out immediately.</p>
+    <div class="chart-slot" data-chart='{"type":"heat","title":"Correlation matrix (example)","labels":["Study hrs","Attendance","Marks","Sleep"],"matrix":[[1,0.97,0.98,-0.78],[0.97,1,0.97,-0.77],[0.98,0.97,1,-0.74],[-0.78,-0.77,-0.74,1]]}'></div>
   </article>
 
-  <article class="topic" data-id="c7-4" data-title="Precision">
-    <h3>Precision</h3>
-    <div class="key">Precision = <b>TP / (TP + FP)</b>: of all the “yes” predictions, how many were actually right.</div>
-    <p><b>Worked:</b> 40 / (40 + 5) = 40 / 45 = <b>0.889</b>.</p>
-    <p><b>Use it when:</b> a <b>false alarm is costly</b>, like a genuine email being marked as spam. Goal: reduce false alarms.</p>
+  <article class="topic" data-id="c7-4" data-title="Visualisation principles">
+    <h3>Visualisation principles</h3>
+    <ul><li>A clear <b>title</b> and labelled <b>axes</b> (with units).</li><li>A <b>legend</b> when several series are shown.</li><li>Readable <b>scales</b>: start bar charts at 0.</li><li>Sensible, limited <b>colours</b>; avoid clutter and 3D effects.</li><li>Avoid <b>misleading</b> charts: truncated axes, pie charts with many slices.</li></ul>
+    <div class="chart-slot" data-chart='{"type":"pie","title":"Market share","items":[["Company A",50],["Company B",30],["Company C",20]]}'></div>
+    <p class="muted">A pie works here because there are only three parts of one whole.</p>
+    <button class="b alt" data-go="scenarios">🧩 Practise: a misleading chart</button>
   </article>
 
-  <article class="topic" data-id="c7-5" data-title="Recall and specificity">
-    <h3>Recall and specificity</h3>
-    <div class="key">Recall (sensitivity) = <b>TP / (TP + FN)</b>: of all the actual “yes” cases, how many did the model catch.</div>
-    <p><b>Worked:</b> 40 / (40 + 10) = 40 / 50 = <b>0.80</b>.</p>
-    <p><b>Use it when:</b> <b>missing a real case</b> is dangerous (disease, fraud). Goal: reduce missed cases.</p>
-    <p><b>Specificity</b> = TN / (TN + FP) = 45 / 50 = <b>0.90</b>: of all actual “no” cases, how many were correctly found.</p>
-    <div class="ur"><b class="t">اردو مثال</b>اسپیم فلٹر میں اصلی ای میل کا اسپیم میں چلا جانا مہنگا ہے، اس لیے precision اہم ہے۔ بیماری کی اسکریننگ میں بیمار کا چھوٹ جانا خطرناک ہے، اس لیے recall اہم ہے۔</div>
+  <article class="topic" data-id="c7-5" data-title="Saving and sharing charts">
+    <h3>Saving and sharing charts</h3>
+    <p>From your notes: save charts as <b>images</b> and write a <b>PDF report</b>.</p>
+    <pre class="code">import matplotlib.pyplot as plt
+plt.plot([1, 2, 3], [3, 1, 2])
+plt.savefig("chart.png")   # saves the picture to a file</pre>
+    <p class="muted">Illustrative: run it in your own notebook.</p>
   </article>
 
-  <article class="topic" data-id="c7-6" data-title="F1 score">
-    <h3>F1 score</h3>
-    <div class="key">F1 = <b>2 × (Precision × Recall) / (Precision + Recall)</b>: the <b>harmonic mean</b>, a balance of precision and recall.</div>
-    <p><b>Worked:</b> 2 × (0.889 × 0.80) / (0.889 + 0.80) = 1.422 / 1.689 = <b>0.842</b>.</p>
-    <p><b>Use it when</b> both precision and recall matter. It is low if either one is low. (Notes: “jab precision dono important ho”.)</p>
-  </article>
-
-  <article class="topic" data-id="c7-7" data-title="Which metric should I use?">
-    <h3>Which metric should I use?</h3>
-    <div class="scroll"><table><tr><th>Situation</th><th>Costly error</th><th>Focus on</th></tr>
-     <tr><td>Spam filter (genuine email marked spam)</td><td>False Positive</td><td><b>Precision</b></td></tr>
-     <tr><td>Disease screening, fraud detection</td><td>False Negative</td><td><b>Recall</b></td></tr>
-     <tr><td>Both matter, or imbalanced classes</td><td>Both</td><td><b>F1</b> (with precision and recall)</td></tr>
-     <tr><td>Balanced classes, quick overview</td><td>—</td><td>Accuracy</td></tr></table></div>
-    <div class="key">Exam focus: do <b>not</b> automatically choose accuracy. In disease screening a false negative can be especially serious.</div>
-    <button class="b alt" data-go="scenarios">🧩 Practise with the metric scenarios</button>
-  </article>
-
-  <div class="card"><b>📝 Mid-exam style questions (Topic 7)</b>
-    <details><summary>Draw and explain a confusion matrix. Define TP, TN, FP, FN.</summary>2×2 table of actual vs predicted. TP: predicted positive, really positive. TN: predicted negative, really negative. FP: predicted positive, really negative (Type I). FN: predicted negative, really positive (Type II).</details>
-    <details><summary>Write the formulas for accuracy, precision, recall, specificity and F1.</summary>Accuracy = (TP+TN)/Total. Precision = TP/(TP+FP). Recall = TP/(TP+FN). Specificity = TN/(TN+FP). F1 = 2PR/(P+R).</details>
-    <details><summary>Why is accuracy misleading on imbalanced data?</summary>A model predicting only the majority class gets high accuracy while missing every rare case; use precision, recall and F1.</details>
+  <div class="card"><b>📝 Mid-exam style questions (Week 7)</b>
+    <details><summary>What is data visualisation and why is it important?</summary>Showing data as charts and graphs to communicate patterns, trends, distributions and relationships quickly and clearly.</details>
+    <details><summary>Explain common charts and their uses.</summary>Bar: categories. Line: trends. Pie: part-to-whole. Histogram: distribution. Scatter: relationship. Box plot: spread and outliers. Heatmap: values as colours (correlations).</details>
+    <details><summary>What makes a chart misleading?</summary>A truncated axis, too many pie slices, missing labels, or poor colours.</details>
   </div>
 </section>
 
-<!-- ============================ TOPIC 8 ============================ -->
+<!-- ============================ TOPIC 8 / WEEK 10 ============================ -->
 <section class="page" id="c8">
-  <h1>Overfitting &amp; underfitting</h1>
-  <p>Why a model can fail on new data, and how to tell what went wrong.</p>
+  <h1>Machine Learning Fundamentals</h1>
+  <p>What ML is, its lifecycle, types of learning, classification vs regression, splitting data, validation, underfitting and overfitting.</p>
 
-  <article class="topic" data-id="c8-1" data-title="The big idea: generalisation">
-    <h3>The big idea: generalisation</h3>
-    <div class="key">A model learns from <b>training data</b>, but its real job is to perform well on <b>new data it has never seen</b>. This ability is called <b>generalisation</b>. Overfitting and underfitting are two ways generalisation fails.</div>
+  <article class="topic" data-id="c8-1" data-title="What is Machine Learning? The ML lifecycle">
+    <h3>What is Machine Learning? The ML lifecycle</h3>
+    <div class="key"><b>Machine Learning</b> = algorithms that <b>learn patterns from data</b> to make predictions or decisions, instead of following rules written by hand.</div>
+    <ol class="steps"><li><b>Collect</b> data</li><li><b>Prepare</b> it (clean, encode, scale)</li><li><b>Split</b> into training, validation and test sets</li><li><b>Train</b> the model on the training set</li><li><b>Evaluate / validate</b> and tune</li><li><b>Deploy</b> the model</li><li><b>Monitor</b> and retrain when needed</li></ol>
+    <div class="ur"><b class="t">اردو مثال</b>اسپیم فلٹر کو ہم ہر اسپیم کا اصول نہیں لکھ کر دیتے؛ ہم ہزاروں ای میلز (اسپیم اور غیر اسپیم) دکھاتے ہیں اور ماڈل خود پیٹرن سیکھ لیتا ہے۔</div>
   </article>
 
-  <article class="topic" data-id="c8-2" data-title="Underfitting">
-    <h3>Underfitting</h3>
-    <div class="key">The model is <b>too simple</b>. It has not learned the pattern, so it performs <b>poorly on both</b> training data and new data.</div>
-    <p>Also called <b>high bias</b>. Causes: too few features, short training, strong regularisation, a model too simple for the pattern.</p>
+  <article class="topic" data-id="c8-2" data-title="Supervised, unsupervised and reinforcement learning">
+    <h3>Supervised, unsupervised and reinforcement learning</h3>
+    <div class="scroll"><table><tr><th>Type</th><th>Data</th><th>Goal</th><th>Example</th></tr>
+     <tr><td><b>Supervised</b></td><td>Labeled: inputs with known answers (targets)</td><td>Predict the answer for new data</td><td>Spam detection, house-price prediction</td></tr>
+     <tr><td><b>Unsupervised</b></td><td>Unlabeled: no answers given</td><td>Find structure or groups</td><td>Customer grouping</td></tr>
+     <tr><td><b>Reinforcement</b></td><td>No fixed dataset: an agent acts and gets rewards</td><td>Learn actions that earn the most reward</td><td>Robot learning to walk</td></tr></table></div>
+    <button class="b alt" data-go="scenarios">🧩 Practise the learning types</button>
   </article>
 
-  <article class="topic" data-id="c8-3" data-title="Overfitting">
+  <article class="topic" data-id="c8-3" data-title="Classification vs regression">
+    <h3>Classification vs regression</h3>
+    <div class="key">In supervised learning the target is either a <b>category</b> (classification) or a <b>number</b> (regression).</div>
+    <div class="scroll"><table><tr><th></th><th>Classification</th><th>Regression</th></tr>
+     <tr><td>Predicts</td><td>A category / label</td><td>A continuous number</td></tr>
+     <tr><td>Examples</td><td>Spam or not spam; loan approved or rejected; cat / dog / bird</td><td>House price; final marks; temperature</td></tr></table></div>
+    <p>If there is <b>no target</b> and you only want groups, that is <b>clustering</b> (unsupervised learning).</p>
+  </article>
+
+  <article class="topic" data-id="c8-4" data-title="Train / validation / test split">
+    <h3>Train / validation / test split</h3>
+    <div class="scroll"><table><tr><th>Set</th><th>Purpose</th></tr>
+     <tr><td><b>Training</b></td><td>The model <b>learns</b> patterns from these rows</td></tr>
+     <tr><td><b>Validation</b></td><td>Compare models and <b>tune</b> settings while building</td></tr>
+     <tr><td><b>Test</b></td><td>One final <b>honest check</b> on unseen data, used once at the end</td></tr></table></div>
+    <pre class="code" data-expect="[0, 1, 2, 3, 4, 5, 6, 7] [8, 9]">data = list(range(10))
+cut = int(len(data) * 0.8)
+train, test = data[:cut], data[cut:]
+print(train, test)</pre>
+    <p class="muted">With scikit-learn: <span class="code">X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</span> (needs the package and your own data).</p>
+    <div class="warn"><b>Data leakage:</b> if test rows influence training or tuning (for example scaling on all the data, or tuning on the test set), the score looks better than reality. A common split is about 70–80% training with the rest for validation and testing.</div>
+    <button class="b alt" data-lab="split">🧪 Open the Train/test split lab</button>
+  </article>
+
+  <article class="topic" data-id="c8-5" data-title="Generalisation and underfitting">
+    <h3>Generalisation and underfitting</h3>
+    <div class="key">A model learns from <b>training data</b>, but its real job is to perform well on <b>new data it has never seen</b>. This is <b>generalisation</b>. Overfitting and underfitting are two ways it fails.</div>
+    <div class="key"><b>Underfitting:</b> the model is <b>too simple</b>. It has not learned the pattern, so it performs <b>poorly on both</b> training data and new data (<b>high bias</b>).</div>
+    <p>Causes: too few features, short training, strong regularisation, a model too simple for the pattern.</p>
+  </article>
+
+  <article class="topic" data-id="c8-6" data-title="Overfitting">
     <h3>Overfitting</h3>
-    <div class="key">The model is <b>too complex</b>. It <b>memorises the training data including its noise</b>, so it looks excellent in training but performs poorly on new data.</div>
-    <p>Also called <b>high variance</b>. Causes: too complex a model, too many features, a small dataset, excessive training.</p>
+    <div class="key">The model is <b>too complex</b>. It <b>memorises the training data including its noise</b>, so it looks excellent in training but performs poorly on new data (<b>high variance</b>).</div>
+    <p>Causes: too complex a model, too many features, a small dataset, excessive training.</p>
+    <button class="b alt" data-lab="fit">🧪 Open the Over/underfitting lab</button>
   </article>
 
-  <article class="topic" data-id="c8-4" data-title="Good fit and the student analogy">
-    <h3>Good fit and the student analogy</h3>
+  <article class="topic" data-id="c8-7" data-title="Good fit, the student analogy and comparison table">
+    <h3>Good fit, the student analogy and comparison table</h3>
     <div class="key"><b>Good fit:</b> the model captures the true patterns and performs well on <b>both</b> training data and new data.</div>
     <ul><li><b>Underfitting</b> = a student who barely studied.</li><li><b>Overfitting</b> = a student who memorised last year's paper word for word.</li><li><b>Good fit</b> = a student who understands the concepts and can solve any new question.</li></ul>
     <div class="ur"><b class="t">اردو مثال</b>ایک طالب علم نے پچھلے سال کا پرچہ رٹ لیا (overfitting): پرانے سوال ٹھیک مگر نیا سوال غلط۔ دوسرے نے بالکل پڑھا ہی نہیں (underfitting): ہر سوال غلط۔ تیسرے نے تصورات سمجھے (good fit): نیا سوال بھی حل کر لیتا ہے۔</div>
-  </article>
-
-  <article class="topic" data-id="c8-5" data-title="Underfitting vs overfitting: comparison table">
-    <h3>Underfitting vs overfitting: comparison table</h3>
     <div class="scroll"><table><tr><th>Aspect</th><th>Underfitting</th><th>Overfitting</th></tr>
      <tr><td>Meaning</td><td>Model too simple to learn the pattern</td><td>Model learns pattern plus noise</td></tr>
      <tr><td>Also called</td><td>High bias</td><td>High variance</td></tr>
@@ -458,121 +754,35 @@ print(df.isnull().sum())</pre>
      <tr><td>Main fix</td><td>Increase complexity, train longer</td><td>Simplify, regularise, add data</td></tr>
      <tr><td>Learning curve</td><td>Both curves high and close together</td><td>Training low, validation high, wide gap</td></tr>
      <tr><td>Analogy</td><td>Student who did not study</td><td>Student who memorised answers</td></tr></table></div>
-    <button class="b alt" data-lab="fit">🧪 Open the Over/underfitting lab</button>
   </article>
 
-  <article class="topic" data-id="c8-6" data-title="Quick diagnosis with numbers">
-    <h3>Quick diagnosis with numbers</h3>
+  <article class="topic" data-id="c8-8" data-title="Quick diagnosis and fixes">
+    <h3>Quick diagnosis and fixes</h3>
     <div class="scroll"><table><tr><th>Training accuracy</th><th>Test accuracy</th><th>Diagnosis</th></tr>
      <tr><td>58%</td><td>55%</td><td><b>Underfitting</b>: both are low</td></tr>
      <tr><td>98%</td><td>70%</td><td><b>Overfitting</b>: large gap</td></tr>
      <tr><td>90%</td><td>88%</td><td><b>Good fit</b>: both high and close</td></tr></table></div>
     <p>Test error is lowest at a <b>medium</b> complexity. Beyond that the model starts to overfit:</p>
     <div class="chart-slot" data-chart='{"type":"lines","title":"Error vs model complexity (illustrative)","xlabel":"model complexity","ylabel":"error","xticks":7,"xmin":1,"xmax":8,"ymin":0,"ymax":1.2,"series":[{"name":"Training error","pts":[[1,0.9],[2,0.5],[3,0.3],[4,0.2],[5,0.12],[6,0.07],[7,0.04],[8,0.02]]},{"name":"Test error","pts":[[1,0.95],[2,0.55],[3,0.35],[4,0.3],[5,0.36],[6,0.5],[7,0.75],[8,1.1]]}]}'></div>
-    <div class="warn">The numbers in the table are illustrative, as in your notes. In practice, judge by both the level and the gap, not by a fixed cut-off.</div>
-  </article>
-
-  <article class="topic" data-id="c8-7" data-title="How to fix them">
-    <h3>How to fix them</h3>
     <div class="scroll"><table><tr><th>Problem</th><th>Solutions</th></tr>
      <tr><td><b>Underfitting</b></td><td>Use a model with suitable complexity, add useful features, reduce excessive regularisation, train appropriately.</td></tr>
      <tr><td><b>Overfitting</b></td><td>Simpler model, regularisation, cross-validation, feature selection, pruning, early stopping, more representative data.</td></tr></table></div>
+    <div class="warn">The numbers in the first table are illustrative, as in your notes. In practice judge by both the level and the gap, not a fixed cut-off.</div>
     <p>Rule of thumb: <b>both errors high → add capacity; big gap → reduce complexity or add data</b>.</p>
   </article>
 
-  <div class="card"><b>📝 Mid-exam style questions (Topic 8)</b>
-    <details><summary>What is overfitting? Give causes and solutions.</summary>A model that memorises training data including noise, so it performs very well in training but poorly on new data. Causes: complex model, too many features, small data, excessive training. Solutions: simpler model, regularisation, cross-validation, feature selection, pruning, early stopping, more data.</details>
+  <div class="card"><b>📝 Mid-exam style questions (Week 10)</b>
+    <details><summary>Explain supervised, unsupervised and reinforcement learning with examples.</summary>Supervised: labeled data (spam detection, house prices). Unsupervised: unlabeled data, finds groups (customer segmentation). Reinforcement: learns by rewards (robot learning).</details>
+    <details><summary>Why do we split data into training, validation and test sets?</summary>Train to learn, validate to tune, test once for an honest final check. It prevents data leakage and over-optimistic scores.</details>
+    <details><summary>What is overfitting? Give causes and solutions.</summary>A model that memorises training data including noise, performing very well in training but poorly on new data. Causes: complex model, too many features, small data, excessive training. Solutions: simpler model, regularisation, cross-validation, feature selection, pruning, early stopping, more data.</details>
     <details><summary>What is underfitting? Give causes and solutions.</summary>A model too simple to capture the pattern: poor on training and test data. Causes: simple model, too few features, too much regularisation, too little training. Solutions: more complexity, better features, less regularisation, more training.</details>
-    <details><summary>Compare training and test error for underfitting, good fit and overfitting.</summary>Underfitting: high/high. Good fit: low/low. Overfitting: very low/high.</details>
-  </div>
-</section>
-
-<!-- ============================ TOPIC 9 ============================ -->
-<section class="page" id="c9">
-  <h1>Tools, cleaning &amp; charts</h1>
-  <p>Python libraries, three tools (Python, Orange, Weka), data cleaning, manipulation and visualisation.</p>
-
-  <article class="topic" data-id="c9-1" data-title="Python libraries for Data Science">
-    <h3>Python libraries for Data Science</h3>
-    <div class="scroll"><table><tr><th>Library</th><th>Purpose</th><th>Key functions (from your notes)</th></tr>
-     <tr><td><b>NumPy</b></td><td>Numerical computing, arrays</td><td class="code">np.array(), np.mean(), np.dot()</td></tr>
-     <tr><td><b>Pandas</b></td><td>Data manipulation, DataFrames</td><td class="code">pd.read_csv(), df.groupby(), df.merge()</td></tr>
-     <tr><td><b>Matplotlib</b></td><td>Basic plotting</td><td class="code">plt.plot(), plt.bar(), plt.scatter(), plt.show()</td></tr>
-     <tr><td><b>Seaborn</b></td><td>Statistical visualisation</td><td class="code">sns.heatmap(), sns.boxplot(), sns.pairplot()</td></tr>
-     <tr><td><b>Scikit-learn</b></td><td>Machine learning</td><td class="code">train_test_split()</td></tr>
-     <tr><td><b>TensorFlow / Keras</b></td><td>Deep learning</td><td class="code">model.compile(), model.fit()</td></tr>
-     <tr><td>SciPy</td><td>Scientific and statistical computing</td><td>tests and optimisation</td></tr>
-     <tr><td>Statsmodels</td><td>Statistical modelling</td><td>regression and inference</td></tr></table></div>
-    <div class="key">NumPy = numerical · Pandas = data · Matplotlib / Seaborn = visualisation · Scikit-learn = ML. Install with <span class="code">pip install numpy</span>.</div>
-    <pre class="code">import numpy as np
-a = np.array([1, 2, 3, 4])
-print(a.mean())      # 2.5
-print(np.dot(a, a))  # 30</pre>
-    <p class="muted">This snippet needs NumPy installed; the outputs shown are what Python prints (checked).</p>
-  </article>
-
-  <article class="topic" data-id="c9-2" data-title="Python vs Orange vs Weka">
-    <h3>Python vs Orange vs Weka</h3>
-    <div class="scroll"><table><tr><th>Tool</th><th>What it is</th><th>Think of it as</th><th>Best for</th></tr>
-     <tr><td><b>Python</b></td><td>A programming language; write code with libraries like pandas, seaborn and scikit-learn</td><td>A full workshop: you can build anything</td><td>Real projects; can be automated and wrapped in an API (FastAPI / Flask) or web app (Streamlit)</td></tr>
-     <tr><td><b>Orange</b></td><td>A visual tool: drag boxes (widgets) and connect them with lines</td><td>LEGO blocks: easy to build, easy to see</td><td>Demos and teaching; <b>not</b> designed for production systems</td></tr>
-     <tr><td><b>Weka</b></td><td>A Java tool with menus and tabs (Explorer)</td><td>A ready-made lab machine: press the right buttons, get results fast</td><td>Classic machine learning</td></tr></table></div>
-    <p><b>Saving work:</b> Python: save charts as images, write a PDF report, save the model with joblib. Weka: save the model as a <span class="code">.model</span> file and reuse it in Weka or Java. Orange: save the workflow as an <span class="code">.ows</span> file and export charts as images.</p>
-  </article>
-
-  <article class="topic" data-id="c9-3" data-title="Data cleaning">
-    <h3>Data cleaning</h3>
-    <div class="key">Data cleaning = detecting and correcting <b>inaccurate, incomplete, inconsistent, duplicate or irrelevant</b> data. Notes: fix weak or missing data; incorrect and duplicate values.</div>
-    <div class="scroll"><table><tr><th>Problem</th><th>What to do</th></tr>
-     <tr><td>Missing values</td><td>Remove, or <b>impute</b> (mean / median / mode) when justified</td></tr>
-     <tr><td>Duplicates</td><td>Identify and remove repeated records</td></tr>
-     <tr><td>Incorrect data types</td><td>Convert to the right type (text → number, text → date)</td></tr>
-     <tr><td>Inconsistent values</td><td>Standardise spelling, case, units, categories</td></tr>
-     <tr><td>Outliers</td><td>Detect, then <b>investigate</b>: error or real value?</td></tr>
-     <tr><td>Invalid values</td><td>Check ranges and rules (impossible age)</td></tr>
-     <tr><td>Integration issues</td><td>Resolve differences when combining sources</td></tr></table></div>
-    <div class="key">Exam focus: cleaning is <b>not</b> simply deleting bad rows. First understand <i>why</i> a value is missing, wrong or unusual.</div>
-    <div class="ur"><b class="t">اردو مثال</b>رجسٹر میں ایک طالب علم کا نام دو بار لکھا ہے (ڈپلیکیٹ)، کسی کے نمبر خالی ہیں، 'Lahore' اور 'lahore' الگ لکھے ہیں اور کسی کی عمر 250 لکھی ہے۔ صفائی میں ان سب کو دیکھ کر ٹھیک کیا جاتا ہے۔</div>
-    <button class="b alt" data-lab="clean">🧪 Open the Data cleaning lab</button>
-  </article>
-
-  <article class="topic" data-id="c9-4" data-title="Data manipulation">
-    <h3>Data manipulation</h3>
-    <div class="key">Manipulation = <b>transforming and organising</b> data so it can be analysed. Pandas is the most common Python library for it.</div>
-    <ul><li>Filtering rows by a condition</li><li>Selecting or removing columns</li><li>Sorting values</li><li>Grouping and aggregation (sum, mean, count)</li><li>Merging / joining datasets</li><li>Reshaping data; changing data types</li><li>Creating calculated (derived) columns</li></ul>
-    <pre class="code">import pandas as pd
-df = pd.DataFrame({"city": ["Lahore", "Karachi", "Lahore"], "marks": [78, 91, 70]})
-print(df.groupby("city")["marks"].mean())</pre>
-    <p class="muted">Needs pandas installed. Output: Karachi 91.0, Lahore 74.0 (mean of 78 and 70).</p>
-    <p><b>Cleaning vs manipulation:</b> cleaning fixes quality problems; manipulation reshapes data for analysis.</p>
-  </article>
-
-  <article class="topic" data-id="c9-5" data-title="Data visualisation: choosing a chart">
-    <h3>Data visualisation: choosing a chart</h3>
-    <div class="key">Visualisation = showing data in graphical form (charts, graphs) to communicate patterns, trends, distributions and relationships. <b>Choose the chart by the question you are answering.</b></div>
-    <div class="scroll"><table><tr><th>Chart</th><th>Best used for</th><th>Example</th></tr>
-     <tr><td><b>Bar chart</b></td><td>Comparing categories</td><td>Sales by product</td></tr>
-     <tr><td><b>Line chart</b></td><td>Trends over time</td><td>Monthly revenue</td></tr>
-     <tr><td><b>Pie chart</b></td><td>Simple part-to-whole</td><td>Market share (few slices)</td></tr>
-     <tr><td><b>Histogram</b></td><td>Distribution of a numerical variable</td><td>Age distribution</td></tr>
-     <tr><td><b>Scatter plot</b></td><td>Relationship between two numbers</td><td>Study hours vs marks</td></tr>
-     <tr><td><b>Box plot</b></td><td>Spread and outliers</td><td>Salary distribution</td></tr>
-     <tr><td><b>Heatmap</b></td><td>Many values / correlations as colours</td><td>Correlation matrix</td></tr></table></div>
-    <p><b>Good practice:</b> clear title, labelled axes, a legend when needed, readable scales and sensible colours. Avoid misleading charts (for example, a cut-off axis or a pie with many slices).</p>
-    <div class="ur"><b class="t">اردو مثال</b>مہینہ وار آمدنی دکھانی ہو تو لائن چارٹ، مختلف دکانوں کا موازنہ ہو تو بار چارٹ، اور پڑھائی کے گھنٹے بمقابلہ نمبر ہو تو اسکیٹر پلاٹ۔</div>
-  </article>
-
-  <div class="card"><b>📝 Mid-exam style questions (Topic 9)</b>
-    <details><summary>List important Python libraries and their purposes.</summary>NumPy: numerical arrays. Pandas: data manipulation. Matplotlib/Seaborn: visualisation. Scikit-learn: machine learning. TensorFlow/Keras: deep learning. SciPy/Statsmodels: scientific and statistical computing.</details>
-    <details><summary>Differentiate data cleaning and data manipulation with examples.</summary>Cleaning fixes quality problems (remove duplicates, fill missing values). Manipulation transforms/organises data (filter, sort, group, merge).</details>
-    <details><summary>Explain common charts and their uses.</summary>Bar: categories. Line: trends. Pie: part-to-whole. Histogram: distribution. Scatter: relationship. Box plot: spread and outliers.</details>
   </div>
 </section>
 
 <!-- ============================ LABS ============================ -->
 <section class="page" id="labs">
   <h1>🧪 Labs</h1>
-  <p class="muted">Change the numbers and watch the graphs. The last lab runs real Python and judges your code.</p>
+  <p class="muted">Change the numbers and watch the graphs. Each lab is tagged with its lecture week. The Python judge runs real Python and tests your code.</p>
   <div class="chips" id="labTabs" role="group" aria-label="Choose a lab"></div>
   <div id="labBox"></div>
 </section>
@@ -591,7 +801,7 @@ print(df.groupby("city")["marks"].mean())</pre>
     <div class="row">
       <div><label for="qMode">Mode</label><select id="qMode">
         <option value="quick">Quick Quiz</option><option value="scenario">Scenario Quiz</option><option value="mixed">Mixed Quiz</option><option value="chapter">Topic Practice</option><option value="mock">Full Mock Exam</option></select></div>
-      <div><label for="qCh">Topic</label><select id="qCh"><option value="all">All topics</option><option value="1">1. Data Science &amp; lifecycle</option><option value="2">2. Roles</option><option value="3">3. Big Data</option><option value="4">4. Data types</option><option value="5">5. Data acquisition</option><option value="6">6. Statistics</option><option value="7">7. Classification metrics</option><option value="8">8. Over/underfitting</option><option value="9">9. Tools, cleaning &amp; charts</option></select></div>
+      <div><label for="qCh">Week / topic</label><select id="qCh"><option value="all">All topics</option><option value="1">Week 1: Introduction to Data Science</option><option value="2">Week 2: Python for Data Science</option><option value="3">Week 3: Data Acquisition</option><option value="4">Week 4: Data Cleaning</option><option value="5">Week 5: Pandas &amp; Data Manipulation</option><option value="6">Week 6: EDA</option><option value="7">Week 7: Data Visualization</option><option value="8">Week 10: Machine Learning Fundamentals</option></select></div>
     </div>
     <p class="muted" id="qModeNote" style="margin:8px 0"></p>
     <div class="row">
@@ -610,7 +820,7 @@ print(df.groupby("city")["marks"].mean())</pre>
   <div class="chips revtabs"><button class="chip on" data-go="cards">🃏 Flashcards &amp; glossary</button><button class="chip" data-go="sheet">📄 Cheat sheet</button></div>
   <h1>Flashcards &amp; Glossary</h1>
   <div class="card">
-    <div class="row"><div><label for="fcCh">Topic</label><select id="fcCh"></select></div>
+    <div class="row"><div><label for="fcCh">Week / topic</label><select id="fcCh"></select></div>
     <div style="flex:none"><button class="b alt" id="fcShuf">Shuffle</button></div></div>
     <div class="fc"><div class="fc-in" id="fcCard"></div></div>
     <p style="text-align:center;color:var(--muted)" id="fcInfo"></p>
@@ -622,7 +832,7 @@ print(df.groupby("city")["marks"].mean())</pre>
   </div>
   <h2>Glossary (search)</h2>
   <label for="gloSearch">Search a term</label>
-  <input type="text" id="gloSearch" placeholder="e.g. precision, outlier, 5 Vs" style="width:100%;max-width:520px">
+  <input type="text" id="gloSearch" placeholder="e.g. groupby, outlier, overfitting" style="width:100%;max-width:520px">
   <div class="scroll"><table id="gloTable"></table></div>
 </section>
 
@@ -632,40 +842,43 @@ print(df.groupby("city")["marks"].mean())</pre>
   <h1>One-Page Cheat Sheet</h1>
   <button class="b noprint" onclick="printSheet()">🖨️ Print / Save cheat sheet as PDF</button>
   <div class="grid">
-    <div class="card"><h3>1. Lifecycle</h3><ul>
-      <li>Problem → Acquire → Explore → Clean → EDA → Features → Model → Evaluate → Deploy → Monitor</li>
-      <li>EDA first checks: shape, info, describe, null check</li></ul></div>
-    <div class="card"><h3>2. Roles</h3><ul>
-      <li>Scientist: models + statistics (Python, R, SQL, TensorFlow)</li><li>Analyst: reports (Excel, SQL, Tableau, Power BI)</li>
-      <li>Engineer: pipelines (Spark, Hadoop, Airflow, Kafka)</li><li>ML Engineer: deploy (PyTorch, TensorFlow, Docker)</li></ul></div>
-    <div class="card"><h3>3. Big Data: 5 Vs</h3><ul>
-      <li>Volume = how much</li><li>Velocity = how fast</li><li>Variety = how many forms</li><li>Veracity = how trustworthy</li><li>Value = how useful</li></ul></div>
-    <div class="card"><h3>4. Data types</h3><ul>
-      <li>Structured: SQL tables</li><li>Semi-structured: JSON, XML</li><li>Unstructured: images, text, audio, video</li>
-      <li>Nominal: no order · Ordinal: order · Discrete: counted · Continuous: measured</li></ul></div>
-    <div class="card"><h3>5. Acquisition</h3><ul>
-      <li>Data = raw facts and figures</li><li>Primary: interview, survey, questionnaire</li><li>Secondary: repository, database, cloud</li>
-      <li>Check permission, privacy, quality, bias</li></ul></div>
-    <div class="card"><h3>6. Statistics</h3><ul>
-      <li>Mean = sum / count · Median = middle · Mode = most frequent</li><li>Range = max − min</li>
-      <li>Variance = average squared deviation · SD = √variance</li><li>z = (x − mean) / SD</li>
-      <li>Normal: 68 / 95 / 99.7 % within 1 / 2 / 3 SD</li><li>r = Cov(X,Y) / (sx·sy); correlation ≠ causation</li>
-      <li>Hypothesis: H0 → H1 → α=0.05 → test → p → compare → decide</li></ul></div>
-    <div class="card"><h3>7. Classification metrics</h3><ul>
-      <li>Accuracy = (TP+TN)/Total</li><li>Precision = TP/(TP+FP)</li><li>Recall = TP/(TP+FN)</li>
-      <li>Specificity = TN/(TN+FP)</li><li>F1 = 2PR/(P+R)</li><li>FP = Type I · FN = Type II</li>
-      <li>Example 40/45/5/10: acc 0.85, prec 0.889, rec 0.80, F1 0.842</li><li>Imbalanced data: do not trust accuracy</li></ul></div>
-    <div class="card"><h3>8. Over / underfitting</h3><ul>
-      <li>Underfit: train high error, test high error (high bias)</li><li>Overfit: train very low, test high, wide gap (high variance)</li>
-      <li>Good fit: both low and close</li><li>Fix underfit: more complexity / features</li><li>Fix overfit: simplify, regularise, more data, cross-validate</li></ul></div>
-    <div class="card"><h3>9. Tools and charts</h3><ul>
-      <li>NumPy numbers · Pandas data · Matplotlib/Seaborn charts · scikit-learn ML</li><li>Orange: visual, teaching · Weka: Java ML · Python: everything</li>
-      <li>Bar categories · Line trend · Pie part-to-whole · Histogram distribution · Scatter relationship · Box spread/outliers</li></ul></div>
+    <div class="card"><h3>Week 1: Introduction</h3><ul>
+      <li>DS = insight from raw data: statistics + programming + domain knowledge</li>
+      <li>AI ⊃ ML; DA = reports and dashboards; DS = whole path from data to insight</li>
+      <li>Lifecycle: Problem → Acquire → Explore → Clean → EDA → Features → Model → Evaluate → Deploy → Monitor</li>
+      <li>Scientist: models · Analyst: reports · Engineer: pipelines · ML Engineer: deploy</li></ul></div>
+    <div class="card"><h3>Week 2: Python</h3><ul>
+      <li>Types: int, float, str, bool</li><li>list [ ] changeable · tuple ( ) fixed · set { } unique · dict {k: v}</li>
+      <li>// whole division · % remainder · ** power</li><li>for / while · def … return</li>
+      <li>NumPy: np.array(), mean, a * 2 (vectorised); list + joins, array + adds</li></ul></div>
+    <div class="card"><h3>Week 3: Data acquisition</h3><ul>
+      <li>Data = raw facts and figures (pictorial, textual, digital)</li><li>Primary: interview, survey, questionnaire · Secondary: repository, database, cloud</li>
+      <li>Structured (SQL) · Semi-structured (JSON, XML) · Unstructured (images, text, audio)</li><li>Formats: CSV, Excel, JSON, database, API</li>
+      <li>Quality: accuracy, completeness, consistency, validity, uniqueness, timeliness</li></ul></div>
+    <div class="card"><h3>Week 4: Cleaning</h3><ul>
+      <li>Missing: delete or impute (mean / median / mode)</li><li>drop_duplicates · standardise text · investigate outliers</li>
+      <li>IQR rule: below Q1 − 1.5·IQR or above Q3 + 1.5·IQR</li><li>Nominal → one-hot · Ordinal → label encoding</li>
+      <li>Min-max = (x − min)/(max − min) · z = (x − mean)/SD</li><li>Learn scaling values from training data only</li></ul></div>
+    <div class="card"><h3>Week 5: Pandas</h3><ul>
+      <li>Series = one column · DataFrame = table</li><li>read_csv, head, info, describe, shape, isnull().sum()</li>
+      <li>Filter df[df["marks"] &gt; 70] · sort_values</li><li>groupby("city")["marks"].mean()</li><li>merge on keys (inner / left / right / outer) · join aligns on index</li></ul></div>
+    <div class="card"><h3>Week 6: EDA</h3><ul>
+      <li>First look: shape → info → describe → null check</li><li>Univariate (1) · Bivariate (2) · Multivariate (3+)</li>
+      <li>Mean = sum/count · Median = middle · Mode = most frequent</li><li>Range = max − min · Variance = average squared deviation · SD = √variance</li>
+      <li>r = Cov(X,Y)/(sx·sy), from −1 to +1; correlation ≠ causation</li></ul></div>
+    <div class="card"><h3>Week 7: Visualization</h3><ul>
+      <li>Bar categories · Line trend · Pie part-to-whole · Histogram distribution</li><li>Scatter relationship · Box spread/outliers · Heatmap colours</li>
+      <li>Matplotlib: plt.plot / bar / scatter / hist / show · Seaborn: heatmap, boxplot, pairplot</li><li>Title, axis labels, legend; start bars at 0</li></ul></div>
+    <div class="card"><h3>Week 10: ML fundamentals</h3><ul>
+      <li>ML lifecycle: collect → prepare → split → train → evaluate → deploy → monitor</li><li>Supervised (labels) · Unsupervised (no labels) · Reinforcement (rewards)</li>
+      <li>Classification = category · Regression = number · Clustering = groups</li><li>Train: learn · Validation: tune · Test: final check once</li>
+      <li>Underfit: both errors high (high bias) · Overfit: train low, test high (high variance) · Good fit: both low and close</li>
+      <li>Fix underfit: more complexity / features · Fix overfit: simplify, regularise, more data</li></ul></div>
   </div>
 </section>
 
 </main>
-<footer>Data Science mids revision · Built from handwritten notes and exam-preparation notes</footer>
+<footer>Data Science mids revision · Weeks 1–7 and 10</footer>
 
 <script src="js/core.js"></script>
 <script src="js/progress.js"></script>
@@ -674,6 +887,7 @@ print(df.groupby("city")["marks"].mean())</pre>
 <script src="js/scenario-data.js"></script>
 <script src="js/judge-data.js"></script>
 <script src="js/labs.js"></script>
+<script src="js/labs-more.js"></script>
 <script src="js/judge.js"></script>
 <script src="js/scenarios.js"></script>
 <script src="js/quiz-modes.js"></script>

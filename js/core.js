@@ -8,9 +8,11 @@ const fmt=n=>Math.round(n).toLocaleString("en-US");
 const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 
 /* ---------- chapter + page info ---------- */
+/* Mid-term scope (confirmed): lecture-plan weeks 1-7 and week 10 */
+const WEEKS=[1,2,3,4,5,6,7,10];
 const CHAPTERS=[
-  ["c1","Data Science & lifecycle"],["c2","Roles in Data Science"],["c3","Big Data (5 Vs)"],["c4","Data types"],["c5","Data acquisition"],
-  ["c6","Statistics for Data Science"],["c7","Classification metrics"],["c8","Overfitting & underfitting"],["c9","Tools, cleaning & charts"]];
+  ["c1","Introduction to Data Science"],["c2","Python for Data Science"],["c3","Data Acquisition"],["c4","Data Cleaning"],
+  ["c5","Pandas & Data Manipulation"],["c6","Exploratory Data Analysis (EDA)"],["c7","Data Visualization"],["c8","Machine Learning Fundamentals"]];
 const NAV=[["home","🏠","Home"],["learn","📚","Learn"],["labs","🧪","Labs"],["scenarios","🧩","Scenarios"],["quiz","✍️","Quiz"],["revise","🃏","Revise"]];
 const PAGE_IDS=["home","labs","scenarios","quiz","cards","sheet",...CHAPTERS.map(c=>c[0])];
 const isChap=id=>/^c\d$/.test(id);
@@ -19,7 +21,7 @@ const isChap=id=>/^c\d$/.test(id);
 function buildNav(){
   $("#tabs").innerHTML=NAV.map(([id,ic,t])=>`<button data-go="${id}" aria-label="${t}"><span class="ic">${ic}</span><span>${t}</span></button>`).join("");
   $$("#tabs button").forEach(b=>b.onclick=()=>go(b.dataset.go));
-  $("#chapbar").innerHTML=`<div class="chapbar-in">${CHAPTERS.map(([id],i)=>`<button class="pill" data-go="${id}">T${i+1}<small id="pc-${id}"></small></button>`).join("")}</div>`;
+  $("#chapbar").innerHTML=`<div class="chapbar-in">${CHAPTERS.map(([id],i)=>`<button class="pill" data-go="${id}">W${WEEKS[i]}<small id="pc-${id}"></small></button>`).join("")}</div>`;
   $$("#chapbar .pill").forEach(b=>b.onclick=()=>go(b.dataset.go));
 }
 function go(id,topic){
@@ -88,7 +90,7 @@ function setupTopics(){
   /* per chapter: toolbar (open all / close all), first topic open, next-chapter button */
   CHAPTERS.forEach(([cid,name],i)=>{
     const page=$("#"+cid);if(!page)return;
-    const h1=$("h1",page);h1.insertAdjacentHTML("beforebegin",`<div class="muted" style="font-size:.85rem;font-weight:700;letter-spacing:.06em">TOPIC ${i+1} OF ${CHAPTERS.length}</div>`);
+    const h1=$("h1",page);h1.insertAdjacentHTML("beforebegin",`<div class="muted" style="font-size:.85rem;font-weight:700;letter-spacing:.06em">WEEK ${WEEKS[i]} (TOPIC ${i+1} OF ${CHAPTERS.length})</div>`);
     const sub=$("h1 + p",page);if(sub)sub.classList.add("sub");
     const tb=document.createElement("div");tb.className="toolbar";
     tb.innerHTML=`<button class="b alt" data-a="open">Open all</button><button class="b alt" data-a="close">Close all</button><span class="count" id="cnt-${cid}"></span>`;
@@ -97,7 +99,7 @@ function setupTopics(){
     const first=$(".topic",page);if(first)setOpen(first,true);
     const nx=document.createElement("div");nx.className="nextbar";
     const next=CHAPTERS[i+1];
-    nx.innerHTML=(next?`<button class="b" data-go="${next[0]}">Next: Topic ${i+2} → ${next[1]}</button>`:`<button class="b" data-go="quiz">Finished! Take the quiz ✍️</button>`)+`<button class="b alt" data-go="quiz">Practice quiz</button>`;
+    nx.innerHTML=(next?`<button class="b" data-go="${next[0]}">Next: Week ${WEEKS[i+1]} → ${next[1]}</button>`:`<button class="b" data-go="quiz">Finished! Take the quiz ✍️</button>`)+`<button class="b alt" data-go="quiz">Practice quiz</button>`;
     page.appendChild(nx);
     $$("button",nx).forEach(b=>b.onclick=()=>go(b.dataset.go));
   });
@@ -122,7 +124,7 @@ function progress(){
 function buildHome(per,d,total){
   $("#chapCards").innerHTML=CHAPTERS.map(([c,name],i)=>{
     const p=per[c]||[0,0],pc=p[1]?Math.round(p[0]/p[1]*100):0;
-    return `<button class="chap-card" data-go="${c}"><div class="n">Topic ${i+1}</div><div class="t">${name}</div><div class="meter"><i style="width:${pc}%"></i></div><div class="s">${p[0]} of ${p[1]} topics learned</div></button>`}).join("");
+    return `<button class="chap-card" data-go="${c}"><div class="n">Week ${WEEKS[i]}</div><div class="t">${name}</div><div class="meter"><i style="width:${pc}%"></i></div><div class="s">${p[0]} of ${p[1]} topics learned</div></button>`}).join("");
   $$("#chapCards .chap-card").forEach(b=>b.onclick=()=>go(b.dataset.go));
   /* continue button: first topic not yet learned */
   const next=$$(".topic[data-id]").find(t=>!done[t.dataset.id]);
@@ -130,7 +132,7 @@ function buildHome(per,d,total){
   if(!next){cb.textContent="🎉 All lessons done: take the quiz";cb.onclick=()=>go("quiz")}
   else{cb.textContent=d?"▶ Continue where you left off":"▶ Start learning";cb.onclick=()=>go(next.closest(".page").id,next.dataset.id)}
   /* all-topics checklist */
-  $("#covmap").innerHTML=CHAPTERS.map(([c,name],i)=>`<h4>Topic ${i+1}: ${name}</h4>`+$$(`#${c} .topic[data-id]`).map(t=>`<a href="#${c}" data-c="${c}" data-t="${t.dataset.id}"><span class="ck">${done[t.dataset.id]?"✅":"⬜"}</span>${t.dataset.title}</a>`).join("")).join("");
+  $("#covmap").innerHTML=CHAPTERS.map(([c,name],i)=>`<h4>Week ${WEEKS[i]}: ${name}</h4>`+$$(`#${c} .topic[data-id]`).map(t=>`<a href="#${c}" data-c="${c}" data-t="${t.dataset.id}"><span class="ck">${done[t.dataset.id]?"✅":"⬜"}</span>${t.dataset.title}</a>`).join("")).join("");
   $$("#covmap a").forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.c,a.dataset.t)});
 }
 $("#resetP").onclick=()=>{if(confirm("Reset ALL progress on this device (topics, scenarios and quizzes)?")){if(window.SQP)SQP.reset();done={};store.set("ds-done",done);$$(".topic").forEach(t=>{t.classList.remove("done");const b=$(".learn-btn",t);if(b)b.textContent="✓ I have learned this"});progress()}};

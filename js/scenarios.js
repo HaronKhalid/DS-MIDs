@@ -7,25 +7,33 @@ const DIFF_L={easy:"Easy",medium:"Medium",hard:"Hard"};
 const STATUS={correct:["✔","Correct"],partial:["◐","Partly correct"],wrong:["✘","Incorrect"],unanswered:["○","Not answered"],written:["✎","Written answer (self-assess below)"]};
 const RUBRIC=[["Correctly identifies the problem",2],["Selects a suitable model / concept",2],["Applies the model to the scenario facts",3],["Recommends a suitable action",2],["Gives a clear justification",1]];
 
-/* lesson topic -> scenario tag, plus a short “where would you use this?” line */
-const TOPIC_TAGS={"c1-1":"definition","c1-2":"lifecycle","c1-3":"lifecycle","c2-1":"roles","c2-2":"roles","c3-1":"bigdata","c3-2":"bigdata","c4-1":"structure","c4-2":"stattypes",
- "c5-1":"acquisition","c5-2":"acquisition","c5-3":"quality","c5-4":"quality","c6-1":"descriptive","c6-2":"spread","c6-3":"normal","c6-4":"hypothesis","c6-5":"correlation",
- "c7-1":"confusion","c7-2":"confusion","c7-3":"accuracy","c7-4":"precision","c7-5":"recall","c7-6":"f1","c7-7":"imbalance",
- "c8-1":"fitting","c8-2":"underfit","c8-3":"overfit","c8-4":"fitting","c8-5":"fitting","c8-6":"fitting","c8-7":"fixes",
- "c9-1":"libraries","c9-2":"tools","c9-3":"cleaning","c9-4":"manipulation","c9-5":"visualization"};
+/* lesson -> scenario tag, plus a short “where would you use this?” line */
+const TOPIC_TAGS={"c1-1":"definition","c1-3":"applications","c1-4":"ds-vs-ai","c1-5":"lifecycle","c1-6":"roles",
+ "c2-3":"collections","c2-4":"loops","c2-5":"loops","c2-6":"numpy","c2-7":"libraries",
+ "c3-1":"acquisition","c3-2":"acquisition","c3-3":"structure","c3-4":"formats","c3-5":"acquisition","c3-6":"quality",
+ "c4-1":"cleaning","c4-2":"missing","c4-3":"cleaning","c4-4":"outliers","c4-5":"encoding","c4-6":"scaling",
+ "c5-1":"pandas-ops","c5-2":"pandas-ops","c5-3":"pandas-ops","c5-4":"groupby","c5-5":"merge","c5-6":"manipulation",
+ "c6-1":"eda-types","c6-2":"eda-types","c6-3":"descriptive","c6-4":"spread","c6-5":"correlation",
+ "c7-1":"plot-calls","c7-2":"visualization","c7-3":"plot-calls","c7-4":"principles",
+ "c8-1":"ml-types","c8-2":"ml-types","c8-3":"class-reg","c8-4":"split","c8-5":"underfit","c8-6":"overfit","c8-7":"fitting","c8-8":"fixes"};
 const WHERE={
- "c1-2":"Planning any real project: follow the stages so you never skip evaluation or monitoring.",
- "c2-1":"Deciding who to hire, or who owns a task, in a data team.",
- "c3-2":"Checking whether a dataset needs big-data tools: how much, how fast, how many forms, how trustworthy, how useful?",
- "c4-1":"Choosing storage and tools: SQL for tables, parsers for JSON/XML, special tools for images, text and audio.",
- "c5-2":"Deciding whether to run your own survey or download an existing dataset.",
- "c6-1":"Reporting salaries or marks: use the median when extreme values exist.",
- "c6-4":"Checking a company claim, or comparing two groups, using sample data.",
+ "c1-5":"Planning any real project: follow the stages so you never skip evaluation or monitoring.",
+ "c1-6":"Deciding who to hire, or who owns a task, in a data team.",
+ "c2-3":"Storing records: lists for sequences, dictionaries for look-ups, sets for unique values.",
+ "c2-6":"Fast maths on many numbers: marks, prices, sensor readings.",
+ "c3-2":"Deciding whether to run your own survey or download an existing dataset.",
+ "c3-4":"Reading CSV, Excel, JSON and API data into Python.",
+ "c4-2":"Any dataset with blanks, before you model it.",
+ "c4-4":"Checking suspicious values such as an age of 250.",
+ "c4-5":"Turning columns like city or size into numbers for a model.",
+ "c4-6":"Features with very different ranges, like age and salary.",
+ "c5-4":"Average marks per city, total sales per month.",
+ "c5-5":"Adding a look-up table (province, product price) to your data.",
+ "c6-3":"Reporting salaries or marks: use the median when extreme values exist.",
  "c6-5":"Before acting on a pattern, ask whether a third factor explains it.",
- "c7-7":"Choosing the metric: fraud and disease screening care about recall, spam filters care about precision.",
- "c8-6":"Reading the train and test scores of any model you build.",
- "c9-3":"Preparing any dataset before modelling.",
- "c9-5":"Choosing a chart for a report or a presentation."};
+ "c7-2":"Choosing a chart for a report or a presentation.",
+ "c8-4":"Every time you train a model: split first, then scale or tune.",
+ "c8-8":"Reading the train and test scores of any model you build."};
 
 /* ====================== shared question engine ====================== */
 const fmtn=n=>String(Math.round(n*100)/100);
@@ -112,7 +120,7 @@ function scByTag(tag){Object.assign(SCS,{ch:"all",cat:"all",diff:"all",status:"a
 function scOpenById(id,mode){scCur=id;scMode=mode||"guided";scStage=0;scNotes={};scStopTimer();scView="detail";go("scenarios")}
 
 function scBadges(s){
-  return `<span class="badge">Topic ${s.chapter}</span><span class="badge">${SC_CATS[s.category]}</span><span class="badge d-${s.difficulty}">${s.difficulty==="easy"?"●":s.difficulty==="medium"?"●●":"●●●"} ${DIFF_L[s.difficulty]}</span><span class="badge">⏱ ${s.minutes} min</span>`;
+  return `<span class="badge">Week ${WEEKS[s.chapter-1]}</span><span class="badge">${SC_CATS[s.category]}</span><span class="badge d-${s.difficulty}">${s.difficulty==="easy"?"●":s.difficulty==="medium"?"●●":"●●●"} ${DIFF_L[s.difficulty]}</span><span class="badge">⏱ ${s.minutes} min</span>`;
 }
 function scList(){
   scView="list";scCur=null;scStopTimer();
@@ -122,7 +130,7 @@ function scList(){
    <div class="card sc-filters">
      <div><label for="scQ">Search</label><input type="text" id="scQ" placeholder="e.g. McCall, refund, recovery" value="${esc(SCS.q)}"></div>
      <div class="row">
-       ${sel("scCh","Topic",[["all","All topics"],...CHAPTERS.map(([id,n],i)=>[String(i+1),(i+1)+". "+n])],SCS.ch)}
+       ${sel("scCh","Week / topic",[["all","All topics"],...CHAPTERS.map(([id,n],i)=>[String(i+1),"Week "+WEEKS[i]+": "+n])],SCS.ch)}
        ${sel("scCat","Category",[["all","All categories"],...Object.entries(SC_CATS)],SCS.cat)}
        ${sel("scDiff","Difficulty",[["all","Any difficulty"],["easy","Easy"],["medium","Medium"],["hard","Hard"]],SCS.diff)}
        ${sel("scSt","Status",[["all","All"],["new","Not started"],["done","Completed"]],SCS.status)}
@@ -171,7 +179,7 @@ function scDetail(){
       <button class="chip ${scMode==="exam"?"on":""}" data-m="exam" aria-pressed="${scMode==="exam"}">⏱ Exam mode</button></div>
     <div id="scBody"></div>
   </div><aside class="sc-side">
-    <div class="card"><b>About this scenario</b><ul class="plain"><li>Topic ${s.chapter}</li><li>${SC_CATS[s.category]}</li><li>${DIFF_L[s.difficulty]} · about ${s.minutes} min</li><li>${b?`Best: ${fmtn(b.score)}/${b.max}`:"Not attempted yet"}</li></ul></div>
+    <div class="card"><b>About this scenario</b><ul class="plain"><li>Week ${WEEKS[s.chapter-1]}</li><li>${SC_CATS[s.category]}</li><li>${DIFF_L[s.difficulty]} · about ${s.minutes} min</li><li>${b?`Best: ${fmtn(b.score)}/${b.max}`:"Not attempted yet"}</li></ul></div>
     <div class="card"><b>Related lessons</b><div class="relbtns">${s.related.map(id=>`<button class="chip" data-t="${id}">📖 ${esc(topicTitle(id))}</button>`).join("")}</div></div>
   </aside></div>`;
   $("#scBack").onclick=()=>{scStopTimer();scList()};
@@ -300,7 +308,7 @@ function renderHomeScenarios(){
     const l=SC.filter(s=>s.chapter===c),d=l.filter(s=>scDone(s.id));
     const bests=d.map(s=>SQP.best(s.id)).filter(b=>b&&b.max);
     const avg=bests.length?Math.round(bests.reduce((a,b)=>a+b.score/b.max,0)/bests.length*100):null;
-    return `<span class="chbadge">T${c}: ${d.length}/${l.length}${avg!==null?" · avg "+avg+"%":""}</span>`}).join("");
+    return `<span class="chbadge">W${WEEKS[c-1]}: ${d.length}/${l.length}${avg!==null?" · avg "+avg+"%":""}</span>`}).join("");
   const nextS=SC.find(s=>!scDone(s.id))||SC[0];
   el.innerHTML=`<div class="card sc-home"><h2 style="margin-top:0">🧩 Practice Scenarios</h2>
     <p>Read a real situation, then identify, calculate and justify, the way the exam asks.</p>
@@ -308,7 +316,7 @@ function renderHomeScenarios(){
     <p class="muted" style="margin:6px 0 12px">${doneL.length} of ${SC.length} scenarios completed</p>
     <div class="btnrow"><button class="b" id="homeScBtn">▶ ${doneL.length?"Continue practising":"Start a scenario"}</button><button class="b alt" id="homeScAll">Browse all</button></div>
     <div class="chbreak">${rows}</div>
-    <p class="muted" style="margin:10px 0 0;font-size:.85rem"><b>Learn</b> = Lessons · <b>Try</b> = Labs and code judge · <b>Revise</b> = Flashcards and Cheat sheet · <b>Practise</b> = Scenarios and Quiz. Progress is saved in this browser only and does not sync across devices.</p></div>`;
+    <p class="muted" style="margin:10px 0 0;font-size:.85rem"><b>Learn</b> = Lessons · <b>Try</b> = Labs and Python judge · <b>Revise</b> = Flashcards and Cheat sheet · <b>Practise</b> = Scenarios and Quiz. Progress is saved in this browser only and does not sync across devices.</p></div>`;
   $("#homeScBtn").onclick=()=>scOpenById(nextS.id);
   $("#homeScAll").onclick=()=>{scView="list";go("scenarios")};
 }

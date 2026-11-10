@@ -1,31 +1,30 @@
-/* Interactive labs (calculators, simulators and graphs). The Python code judge lives in judge.js. */
+/* Interactive labs (calculators, simulators and graphs). More labs: labs-more.js. The Python judge: judge.js. */
 const rngSeed=seed=>{let a=seed>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
 const gauss=r=>{let u=0,v=0;while(!u)u=r();v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
 const sum=a=>a.reduce((x,y)=>x+y,0);
 const mean=a=>sum(a)/a.length;
 const quantile=(s,p)=>{const i=(s.length-1)*p,lo=Math.floor(i),hi=Math.ceil(i);return s[lo]+(s[hi]-s[lo])*(i-lo)};
 const numOr=(el,d)=>{const v=parseFloat(el.value);return isFinite(v)?v:d};
-const pct=v=>isFinite(v)?nf(v*100,1)+"%":"undefined";
-const dv=(a,b)=>b===0?NaN:a/b;
 
 /* ---------- lab registry ---------- */
 const LABS=[
- ["lifecycle","🔁","Lifecycle builder",labLifecycle],
- ["confusion","🎯","Confusion matrix",labConfusion],
- ["stats","📊","Descriptive stats",labStats],
- ["corr","📈","Correlation",labCorr],
- ["normal","🔔","Normal curve",labNormal],
- ["hyp","⚖️","Hypothesis test",labHyp],
- ["fit","📉","Over / underfitting",labFit],
- ["clean","🧹","Data cleaning",labClean],
- ["judge","🐍","Python code judge",b=>labJudge(b)]]; /* judge.js loads later, so look it up lazily */
+ ["lifecycle","🔁","Lifecycle builder","W1",labLifecycle],
+ ["judge","🐍","Python code judge","W2",b=>labJudge(b)], /* judge.js loads later, so look it up lazily */
+ ["scale","📏","Scaling & encoding","W4",b=>labScale(b)],
+ ["clean","🧹","Data cleaning","W4",labClean],
+ ["pandas","🐼","Pandas explorer","W5",b=>labPandas(b)],
+ ["stats","📊","Descriptive stats","W6",labStats],
+ ["corr","📈","Correlation","W6",labCorr],
+ ["charts","🎨","Chart chooser","W7",b=>labCharts(b)],
+ ["split","✂️","Train/test split","W10",b=>labSplit(b)],
+ ["fit","📉","Over / underfitting","W10",labFit]];
 function labsShow(){
   const cur=store.get("ds-lab","lifecycle");
   const id=LABS.some(l=>l[0]===cur)?cur:"lifecycle";
-  $("#labTabs").innerHTML=LABS.map(([k,ic,t])=>`<button class="chip ${k===id?"on":""}" data-lab="${k}" aria-pressed="${k===id}">${ic} ${t}</button>`).join("");
+  $("#labTabs").innerHTML=LABS.map(([k,ic,t,w])=>`<button class="chip ${k===id?"on":""}" data-lab="${k}" aria-pressed="${k===id}">${ic} ${t} <small>${w}</small></button>`).join("");
   $$("#labTabs .chip").forEach(b=>b.onclick=()=>{store.set("ds-lab",b.dataset.lab);labsShow()});
   const lab=LABS.find(l=>l[0]===id);
-  lab[3]($("#labBox"));
+  lab[4]($("#labBox"));
 }
 
 /* ====================== 1. Lifecycle builder ====================== */
@@ -45,35 +44,6 @@ function labLifecycle(box){
     $("#lcReset").onclick=()=>{pool=shuffle(LIFE.map((_,i)=>i));seq=[];checked=false;draw()};
   };
   draw();
-}
-
-/* ====================== 2. Confusion matrix ====================== */
-const CM_PRESETS={"Bank fraud example":[40,45,5,10],"Always says ‘no fraud’ (imbalanced)":[0,990,0,10],"Spam filter":[90,870,30,10],"Disease screening":[45,130,10,15]};
-function labConfusion(box){
-  box.innerHTML=`<div class="card"><h3>Confusion matrix and classification metrics</h3>
-   <p>Change the four counts. Everything below updates. <b>Positive</b> = the class you are looking for (e.g. fraud).</p>
-   <div class="chips" id="cmPre">${Object.keys(CM_PRESETS).map(k=>`<button class="chip" data-p="${esc(k)}">${esc(k)}</button>`).join("")}</div>
-   <div class="row"><div><label for="cmTP">TP (true positive)</label><input type="number" id="cmTP" min="0" value="40"></div><div><label for="cmTN">TN (true negative)</label><input type="number" id="cmTN" min="0" value="45"></div>
-   <div><label for="cmFP">FP (false positive)</label><input type="number" id="cmFP" min="0" value="5"></div><div><label for="cmFN">FN (false negative)</label><input type="number" id="cmFN" min="0" value="10"></div></div>
-   <div id="cmOut"></div></div>`;
-  const get=()=>["cmTP","cmTN","cmFP","cmFN"].map(id=>Math.max(0,Math.round(numOr($("#"+id),0))));
-  const upd=()=>{
-    const [tp,tn,fp,fn]=get(),tot=tp+tn+fp+fn;
-    const acc=dv(tp+tn,tot),pre=dv(tp,tp+fp),rec=dv(tp,tp+fn),spe=dv(tn,tn+fp),f1=(isFinite(pre)&&isFinite(rec)&&pre+rec>0)?2*pre*rec/(pre+rec):NaN;
-    const row=(n,fm,sub,v)=>`<tr><td><b>${n}</b></td><td>${fm}</td><td class="code">${sub}</td><td><b>${pct(v)}</b></td></tr>`;
-    let tip="";
-    if(isFinite(acc)&&acc>=0.9&&isFinite(rec)&&rec<0.5)tip=`<div class="warn"><b>Accuracy paradox:</b> accuracy is ${pct(acc)} but recall is only ${pct(rec)}. The model misses most real positives. Never judge imbalanced data by accuracy alone.</div>`;
-    else if(tot&&!isFinite(pre))tip=`<div class="warn">Precision is undefined because the model never predicted ‘positive’ (TP + FP = 0).</div>`;
-    else if(tot)tip=`<div class="key">${fp>fn?"More false alarms (FP) than misses (FN): precision suffers.":fn>fp?"More misses (FN) than false alarms (FP): recall suffers.":"FP and FN are equal."}</div>`;
-    $("#cmOut").innerHTML=`<div class="lab-grid"><div>${chartConfusion(tp,tn,fp,fn)}<p class="muted">Total = ${tot}</p></div>
-     <div>${chartBars([{label:"Accuracy",value:isFinite(acc)?acc:0},{label:"Precision",value:isFinite(pre)?pre:0,color:COL.warn},{label:"Recall",value:isFinite(rec)?rec:0,color:COL.ok},{label:"F1",value:isFinite(f1)?f1:0,color:COL.purple}],{max:1,fmt:v=>nf(v*100,1)+"%",yfmt:v=>Math.round(v*100)+"%",h:230})}</div></div>
-     <div class="scroll"><table><tr><th>Metric</th><th>Formula</th><th>With your numbers</th><th>Value</th></tr>
-      ${row("Accuracy","(TP + TN) / Total",`(${tp}+${tn}) / ${tot}`,acc)}${row("Precision","TP / (TP + FP)",`${tp} / (${tp}+${fp})`,pre)}${row("Recall (sensitivity)","TP / (TP + FN)",`${tp} / (${tp}+${fn})`,rec)}
-      ${row("Specificity","TN / (TN + FP)",`${tn} / (${tn}+${fp})`,spe)}${row("F1 score","2·P·R / (P + R)",isFinite(pre)&&isFinite(rec)?`2·${nf(pre,3)}·${nf(rec,3)} / (${nf(pre,3)}+${nf(rec,3)})`:"—",f1)}</table></div>${tip}`;
-  };
-  $$("#cmTP,#cmTN,#cmFP,#cmFN",box).forEach(e=>e.oninput=upd);
-  $$("#cmPre .chip",box).forEach(c=>c.onclick=()=>{const v=CM_PRESETS[c.dataset.p];["cmTP","cmTN","cmFP","cmFN"].forEach((id,i)=>$("#"+id).value=v[i]);upd()});
-  upd();
 }
 
 /* ====================== 3. Descriptive statistics ====================== */
@@ -148,68 +118,6 @@ function labCorr(box){
   $$("#coPre .chip",box).forEach(c=>c.onclick=()=>{mode=c.dataset.p;$$("#coPre .chip",box).forEach(x=>x.classList.toggle("on",x===c));upd()});
   upd();
 }
-
-/* ====================== 5. Normal curve ====================== */
-function labNormal(box){
-  box.innerHTML=`<div class="card"><h3>The normal distribution (bell curve)</h3>
-   <p>About <b>68%</b> of data lies within 1 standard deviation of the mean, <b>95%</b> within 2 and <b>99.7%</b> within 3.</p>
-   <div class="row"><div><label for="nMu">Mean μ: <b id="nMuv">60</b></label><input type="range" id="nMu" min="0" max="100" value="60"></div><div><label for="nSd">Std deviation σ: <b id="nSdv">10</b></label><input type="range" id="nSd" min="1" max="30" value="10"></div></div>
-   <div class="chips" id="nK"><button class="chip on" data-k="1">±1σ</button><button class="chip" data-k="2">±2σ</button><button class="chip" data-k="3">±3σ</button></div>
-   <div id="nChart"></div><div id="nInfo"></div>
-   <h4>z-score and probability</h4>
-   <div class="row"><div><label for="nX">A value x</label><input type="number" id="nX" value="80"></div><div><label for="nA">From a</label><input type="number" id="nA" value="50"></div><div><label for="nB">To b</label><input type="number" id="nB" value="70"></div></div>
-   <div id="nCalc"></div></div>`;
-  let k=1;
-  const upd=()=>{
-    const mu=numOr($("#nMu"),60),sd=numOr($("#nSd"),10);$("#nMuv").textContent=mu;$("#nSdv").textContent=sd;
-    const x=numOr($("#nX"),mu),a=numOr($("#nA"),mu-sd),b=numOr($("#nB"),mu+sd);
-    const within=erf(k/Math.SQRT2);
-    $("#nChart").innerHTML=chartNormal({mu,sd,k,marker:x,xlabel:"value",dec:0,title:`μ = ${mu}, σ = ${sd}: shaded μ ± ${k}σ = [${nf(mu-k*sd,1)}, ${nf(mu+k*sd,1)}]`});
-    $("#nInfo").innerHTML=`<div class="out">Within ±${k}σ: <b>${nf(within*100,2)}%</b> of values. Outside: ${nf((1-within)*100,2)}%.</div>`;
-    const z=(x-mu)/sd,p=normCdf(z),pab=a<=b?normCdf((b-mu)/sd)-normCdf((a-mu)/sd):NaN;
-    $("#nCalc").innerHTML=`<div class="scroll"><table><tr><th>Question</th><th>Working</th><th>Answer</th></tr>
-      <tr><td>z-score of x = ${x}</td><td>(x − μ) / σ = (${x} − ${mu}) / ${sd}</td><td><b>${nf(z,2)}</b> (${Math.abs(z)<1e-9?"exactly at the mean":nf(Math.abs(z),2)+" SD "+(z>0?"above":"below")+" the mean"})</td></tr>
-      <tr><td>P(X ≤ ${x})</td><td>Φ(${nf(z,2)})</td><td><b>${nf(p*100,2)}%</b></td></tr>
-      <tr><td>P(${a} ≤ X ≤ ${b})</td><td>Φ(z<sub>b</sub>) − Φ(z<sub>a</sub>)</td><td><b>${isFinite(pab)?nf(pab*100,2)+"%":"a must be ≤ b"}</b></td></tr></table></div>
-      <p class="muted">The orange line marks x. Probabilities use the normal CDF.</p>`;
-  };
-  $$("#nMu,#nSd,#nX,#nA,#nB",box).forEach(e=>e.oninput=upd);
-  $$("#nK .chip",box).forEach(c=>c.onclick=()=>{k=+c.dataset.k;$$("#nK .chip",box).forEach(x=>x.classList.toggle("on",x===c));upd()});
-  upd();
-}
-
-/* ====================== 6. Hypothesis test (one-sample z-test) ====================== */
-function labHyp(box){
-  box.innerHTML=`<div class="card"><h3>Hypothesis testing step by step</h3>
-   <p>Example test: a <b>one-sample z-test</b> (population standard deviation known). Claim: the true average is μ₀.</p>
-   <div class="row"><div><label for="hM0">Claimed mean μ₀</label><input type="number" id="hM0" value="30"></div><div><label for="hXb">Sample mean x̄</label><input type="number" id="hXb" value="32" step="0.1"></div>
-   <div><label for="hSd">Known σ</label><input type="number" id="hSd" value="6" min="0.01" step="0.1"></div><div><label for="hN">Sample size n</label><input type="number" id="hN" value="36" min="2"></div></div>
-   <div class="row"><div><label for="hA">Significance level α</label><select id="hA"><option>0.01</option><option selected>0.05</option><option>0.10</option></select></div>
-   <div><label for="hT">Alternative H1</label><select id="hT"><option value="two">μ ≠ μ₀ (two-sided)</option><option value="gt">μ &gt; μ₀ (right-tailed)</option><option value="lt">μ &lt; μ₀ (left-tailed)</option></select></div></div>
-   <div id="hOut"></div></div>`;
-  const upd=()=>{
-    const m0=numOr($("#hM0"),30),xb=numOr($("#hXb"),30),sd=Math.max(0.0001,numOr($("#hSd"),1)),n=Math.max(2,Math.round(numOr($("#hN"),2))),al=parseFloat($("#hA").value),t=$("#hT").value;
-    const se=sd/Math.sqrt(n),z=(xb-m0)/se;
-    const p=t==="two"?2*(1-normCdf(Math.abs(z))):t==="gt"?1-normCdf(z):normCdf(z);
-    const rej=p<al;
-    let tails=[];const zc=t==="two"?inv(1-al/2):inv(1-al);
-    if(t==="two")tails=[[-4,-zc],[zc,4]];else if(t==="gt")tails=[[zc,4]];else tails=[[-4,-inv(1-al)]];
-    const h1=t==="two"?"μ ≠ "+m0:t==="gt"?"μ > "+m0:"μ < "+m0;
-    $("#hOut").innerHTML=`<ol class="steps">
-      <li><b>Define H0:</b> μ = ${m0} (the claim: no difference)</li>
-      <li><b>Define H1:</b> ${h1}</li>
-      <li><b>Set α:</b> ${al}</li>
-      <li><b>Run the test:</b> z = (x̄ − μ₀) / (σ/√n) = (${xb} − ${m0}) / (${nf(sd,2)}/√${n}) = <b>${nf(z,3)}</b></li>
-      <li><b>p-value:</b> <b>${p<0.0001?"< 0.0001":nf(p,4)}</b> (probability of a result at least this extreme if H0 were true)</li>
-      <li><b>Compare:</b> p ${rej?"<":"≥"} α (${nf(p,4)} ${rej?"<":"≥"} ${al})</li>
-      <li><b>Decision:</b> ${rej?'<span class="badc">Reject H0</span>: the result is statistically significant at α = '+al:'<span class="good">Fail to reject H0</span>: not enough evidence against it'}</li></ol>
-     ${chartNormal({mu:0,sd:1,tails,marker:Math.max(-3.9,Math.min(3.9,z)),xlabel:"z",dec:1,title:"Standard normal: red = rejection region, orange = your z"})}
-     <div class="key">Careful wording: ‘fail to reject H0’ does not prove H0 true, and the p-value is <b>not</b> the probability that H0 is true.</div>`;
-  };
-  $$("#hM0,#hXb,#hSd,#hN,#hA,#hT",box).forEach(e=>{e.oninput=upd;e.onchange=upd});
-  upd();
-}
-function inv(p){ /* inverse normal CDF by bisection */ let lo=-8,hi=8;for(let i=0;i<60;i++){const m=(lo+hi)/2;normCdf(m)<p?lo=m:hi=m}return(lo+hi)/2}
 
 /* ====================== 7. Over / underfitting ====================== */
 function polyFit(xs,ys,deg){

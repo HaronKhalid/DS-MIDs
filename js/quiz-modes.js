@@ -73,7 +73,7 @@ function qDraw(){
   const answered=QS.ans.filter(a=>a!==null).length;
   box.innerHTML=`<div class="card qcard">
     ${QS.exam?`<div class="timerbar" id="qTimer" role="timer">⏱ 30:00</div>`:""}
-    <div class="qhead"><span>Question ${QS.i+1} of ${n} · Topic ${q.ch}${q.src==="s"?" · "+DIFF_L[q.diff]:""}</span><span>${QS.exam?answered+" answered":"Score so far: "+fmtn(QS.qs.reduce((a,x,i)=>a+(QS.checked[i]?qGrade(x,QS.ans[i]).got:0),0))}</span></div>
+    <div class="qhead"><span>Question ${QS.i+1} of ${n} · Week ${WEEKS[q.ch-1]}${q.src==="s"?" · "+DIFF_L[q.diff]:""}</span><span>${QS.exam?answered+" answered":"Score so far: "+fmtn(QS.qs.reduce((a,x,i)=>a+(QS.checked[i]?qGrade(x,QS.ans[i]).got:0),0))}</span></div>
     <div class="meter"><i style="width:${Math.round((QS.i+1)/n*100)}%"></i></div>
     ${q.src==="s"?`<div class="case" style="margin-top:12px"><div class="case-h">📋 Scenario: ${esc(q.scTitle)}</div><p>${esc(q.desc)}</p></div>`:""}
     <fieldset class="qbox" id="qFs" ${locked?"disabled":""}><legend>${esc(q.prompt)} <span class="marks">${marksLabel(q)}</span></legend><p class="qnote">${typeNote(q)}</p>${qCode(q)}${qInputs(q,"qz",QS.ans[QS.i])}</fieldset>
@@ -123,9 +123,9 @@ function qFinish(){
     <div class="big">${fmtn(score)} / ${max} <small>(${pct}%)</small></div>
     <p>${pct>=85?"Excellent work.":pct>=60?"Good. Review the weak areas below.":"Keep practising: revise the lessons, then try again."}</p>
     <p class="muted">Correct: ${grades.filter(g=>g.status==="correct").length} · Partly correct: ${grades.filter(g=>g.status==="partial").length} · Incorrect: ${grades.filter(g=>g.status==="wrong").length} · Unanswered: ${unans} · Time: ${Math.floor(secs/60)}m ${secs%60}s</p>
-    <b>Topic-wise performance</b>
-    ${Object.keys(per).sort().map(c=>{const p=per[c],pc=p.max?Math.round(p.got/p.max*100):0;return `<div class="perf"><span>Topic ${c}: ${fmtn(p.got)}/${p.max} (${pc}%) ${pc>=70?"✔":"⚠ revise"}</span><div class="meter"><i style="width:${pc}%"></i></div></div>`}).join("")}
-    ${weakCh.length||wrongTags.length?`<div class="card"><b>Review weak topics</b><div class="relbtns">${weakCh.map(c=>`<button class="chip" data-rev="c${c}">📖 Read Topic ${c}</button><button class="chip" data-sc="${c}">🧩 Scenarios: Topic ${c}</button>`).join("")}${wrongTags.map(t=>`<button class="chip" data-tag="${esc(t)}">🧩 Practise #${esc(t)}</button>`).join("")}</div></div>`:`<p class="good">No weak areas found.</p>`}
+    <b>Week-wise performance</b>
+    ${Object.keys(per).sort().map(c=>{const p=per[c],pc=p.max?Math.round(p.got/p.max*100):0;return `<div class="perf"><span>Week ${WEEKS[c-1]}: ${fmtn(p.got)}/${p.max} (${pc}%) ${pc>=70?"✔":"⚠ revise"}</span><div class="meter"><i style="width:${pc}%"></i></div></div>`}).join("")}
+    ${weakCh.length||wrongTags.length?`<div class="card"><b>Review weak topics</b><div class="relbtns">${weakCh.map(c=>`<button class="chip" data-rev="c${c}">📖 Read Week ${WEEKS[c-1]}</button><button class="chip" data-sc="${c}">🧩 Scenarios: Week ${WEEKS[c-1]}</button>`).join("")}${wrongTags.map(t=>`<button class="chip" data-tag="${esc(t)}">🧩 Practise #${esc(t)}</button>`).join("")}</div></div>`:`<p class="good">No weak areas found.</p>`}
     <div class="btnrow"><button class="b" id="qAgain">Try again</button><button class="b alt" id="qNew">Change settings</button></div>
     ${review.length?`<h3>Review: ${review.length} question${review.length>1?"s":""} to look at</h3>${review.map(x=>(x.q.src==="s"?`<p class="muted"><small>Scenario: ${esc(x.q.scTitle)}</small></p>`:"")+qFeedback(x.q,QS.ans[x.i],x.g,"Q"+(x.i+1))).join("")}`:""}
   </div>`;
