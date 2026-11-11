@@ -44,7 +44,7 @@ function numParse(t){
   m=t.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);if(m)return +m[2]?parseFloat(m[1])/parseFloat(m[2]):null;
   return /^-?\d+(?:\.\d+)?$/.test(t)?parseFloat(t):null;
 }
-const qCode=q=>q.code?`<pre class="code">${esc(q.code)}</pre>`:"";
+const qCode=q=>q.code?`<pre class="code py">${esc(q.code)}</pre>`:"";
 function typeNote(q){return {single:"Choose ONE answer.",multi:"Select ALL that apply. Partial credit: correct picks minus wrong picks.",match:"Choose a category for every item.",number:"Type a number (for example 0.85, 85% or 40/50).",written:"Write your own answer, then compare it with the model answer (self-assessed)."}[q.type]}
 function marksLabel(q){return q.type==="written"?"self-assessed":q.marks+(q.marks===1?" mark":" marks")}
 

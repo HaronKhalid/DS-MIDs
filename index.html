@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Data Science Mids Guide</title>
-<meta name="description" content="Data Science mid-term study guide (weeks 1-7 and 10): notes, Urdu examples, graphs, scenarios, quizzes and a Python code judge.">
+<meta name="description" content="Data Science mid-term study guide (weeks 1-7 and 10): notes, Urdu examples, graphs, scenarios, quizzes and a Python playground with pandas and NumPy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/labs.css">
+<link rel="stylesheet" href="css/code.css">
 </head>
 <body>
 <header class="top">
@@ -29,7 +30,7 @@
 <section class="page" id="home">
   <div class="hero">
     <h1>Data Science Mids Guide</h1>
-    <p>Mid-term topics: Weeks 1–7 and Week 10 of the lecture plan. Easy notes with Urdu examples, live graphs, scenario practice, quizzes and a Python code judge.</p>
+    <p>Mid-term topics: Weeks 1–7 and Week 10 of the lecture plan. Easy notes with Urdu examples, live graphs, scenario practice, quizzes and a Python playground that runs real pandas and NumPy code.</p>
     <button class="b btn-big" id="continueBtn">▶ Start learning</button>
   </div>
 
@@ -40,7 +41,7 @@
 
   <h2>🧪 Try, practise, revise</h2>
   <div class="practice-grid">
-    <button class="chap-card" data-go="labs"><div class="t">🧪 Labs</div><div class="s">Graphs, calculators, Pandas explorer and a Python judge</div></button>
+    <button class="chap-card" data-go="labs"><div class="t">🧪 Labs</div><div class="s">Python playground (pandas, NumPy, charts), code judge, graphs and calculators</div></button>
     <button class="chap-card" data-go="quiz"><div class="t">✍️ Quiz</div><div class="s">Quick, scenario and mock exam modes</div></button>
     <button class="chap-card" data-go="cards"><div class="t">🃏 Flashcards</div><div class="s">Quick revision of all terms</div></button>
     <button class="chap-card" data-go="sheet"><div class="t">📄 Cheat sheet</div><div class="s">Formulas and tables on one page</div></button>
@@ -49,17 +50,18 @@
   <details class="fold"><summary>📅 2-day study plan</summary><div>
     <p><b>Day 1</b></p><ul>
       <li>Week 1 Introduction · Week 2 Python · Week 3 Data acquisition · Week 4 Data cleaning</li>
-      <li>Labs: Lifecycle builder, Python judge, Scaling &amp; encoding, Data cleaning</li></ul>
+      <li>Labs: Lifecycle builder, Python playground, Python judge, Scaling &amp; encoding, Data cleaning</li></ul>
     <p><b>Day 2</b></p><ul>
       <li>Week 5 Pandas · Week 6 EDA · Week 7 Visualization · Week 10 ML fundamentals</li>
-      <li>Labs: Pandas explorer, Descriptive stats, Correlation, Chart chooser, Train/test split, Over/underfitting</li>
+      <li>Labs: Python playground (pandas examples), Pandas explorer, Descriptive stats, Correlation, Chart chooser, Train/test split, Over/underfitting</li>
       <li>Finish with scenarios, flashcards and a full mock exam</li></ul></div></details>
 
   <details class="fold"><summary>🎯 How to study with this page</summary><div><ul>
     <li>Tap a lesson to open it. Read the <b>💡 key point</b> first, then the green <b>Urdu example</b>.</li>
     <li>Use the <b>Labs</b> to see ideas move: change numbers and watch graphs update.</li>
     <li>Practise with <b>Scenarios</b>: calculation answers are checked automatically.</li>
-    <li>Use the <b>Python code judge</b> to write real code and get it tested.</li>
+    <li>Use the <b>Python playground</b> to run your own code with pandas, NumPy and charts (works on a phone). Press <b>▶ Run</b> on any code block in a lesson to try it.</li>
+    <li>Use the <b>Python code judge</b> to solve exercises and get your code tested.</li>
     <li>Press <b>“I have learned this”</b> to track progress.</li></ul></div></details>
 
   <details class="fold"><summary>🗂️ All lessons checklist</summary><div class="cov" id="covmap"></div></details>
@@ -175,7 +177,7 @@
 name = "Ali"
 print("Hello", name)</pre>
     <p class="muted">Output: Hello, Data Science / Hello Ali.</p>
-    <button class="b alt" data-lab="judge">🐍 Practise in the Python judge</button>
+    <button class="b alt" data-lab="play">▶️ Open the Python playground</button> <button class="b alt" data-lab="judge">🐍 Practise in the Python judge</button>
   </article>
 
   <article class="topic" data-id="c2-2" data-title="Variables and data types">
@@ -239,7 +241,7 @@ while count < 3:
     count += 1
 print(count)</pre>
     <div class="key">Your homework task: a Python program using <b>an array, a loop, conditions and a calculator</b>. Try the exercises in the Python judge.</div>
-    <button class="b alt" data-lab="judge">🐍 Open the Python judge</button>
+    <button class="b alt" data-lab="judge">🐍 Open the Python judge</button> <button class="b alt" data-lab="play">▶️ Write it in the playground</button>
   </article>
 
   <article class="topic" data-id="c2-6" data-title="NumPy: arrays and operations">
@@ -550,7 +552,7 @@ print(df.shape)
 df.info()
 print(df.describe())
 print(df.isnull().sum())</pre>
-    <p class="muted">This code needs a CSV file named students.csv and was not run here.</p>
+    <p class="muted">Press ▶ Run to try it: the playground has a practice file named students.csv.</p>
   </article>
 
   <article class="topic" data-id="c6-2" data-title="Univariate, bivariate and multivariate analysis">
@@ -624,7 +626,7 @@ plt.title("Demo")
 plt.xlabel("x")
 plt.ylabel("y")
 plt.show()</pre>
-    <p class="muted">Draws a line chart; it needs Matplotlib and shows a picture, so it is illustrative here. Key calls from your notes: plt.plot(), plt.bar(), plt.scatter(), plt.show().</p>
+    <p class="muted">Draws a line chart: press ▶ Run to see it in the playground. Key calls from your notes: plt.plot(), plt.bar(), plt.scatter(), plt.show().</p>
   </article>
 
   <article class="topic" data-id="c7-2" data-title="Choosing a chart">
@@ -645,11 +647,11 @@ plt.show()</pre>
   <article class="topic" data-id="c7-3" data-title="Seaborn and heatmaps">
     <h3>Seaborn and heatmaps</h3>
     <div class="key"><b>Seaborn</b> builds on Matplotlib and makes statistical charts easy: <span class="code">sns.heatmap()</span>, <span class="code">sns.boxplot()</span>, <span class="code">sns.pairplot()</span>.</div>
-    <pre class="code">import seaborn as sns
+    <pre class="code" data-norun>import seaborn as sns
 sns.heatmap(df.corr(), annot=True)   # correlation heatmap
 sns.boxplot(x=df["salary"])          # spread and outliers
 sns.pairplot(df)                     # scatter plots of all pairs</pre>
-    <p class="muted">Illustrative: needs seaborn and your own DataFrame df.</p>
+    <p class="muted">Illustrative: it needs your own DataFrame df. A complete version is in the playground under “Seaborn heatmap”.</p>
     <p>A <b>heatmap</b> shows a table of numbers as colours. For a correlation matrix, each cell is r between two variables; strong positive or negative cells stand out immediately.</p>
     <div class="chart-slot" data-chart='{"type":"heat","title":"Correlation matrix (example)","labels":["Study hrs","Attendance","Marks","Sleep"],"matrix":[[1,0.97,0.98,-0.78],[0.97,1,0.97,-0.77],[0.98,0.97,1,-0.74],[-0.78,-0.77,-0.74,1]]}'></div>
   </article>
@@ -668,7 +670,7 @@ sns.pairplot(df)                     # scatter plots of all pairs</pre>
     <pre class="code">import matplotlib.pyplot as plt
 plt.plot([1, 2, 3], [3, 1, 2])
 plt.savefig("chart.png")   # saves the picture to a file</pre>
-    <p class="muted">Illustrative: run it in your own notebook.</p>
+    <p class="muted">Press ▶ Run to try it: chart.png then appears under Files in the playground.</p>
   </article>
 
   <div class="card"><b>📝 Mid-exam style questions (Week 7)</b>
@@ -782,7 +784,7 @@ print(train, test)</pre>
 <!-- ============================ LABS ============================ -->
 <section class="page" id="labs">
   <h1>🧪 Labs</h1>
-  <p class="muted">Change the numbers and watch the graphs. Each lab is tagged with its lecture week. The Python judge runs real Python and tests your code.</p>
+  <p class="muted">Change the numbers and watch the graphs. Each lab is tagged with its lecture week. The <b>Python playground</b> runs your own code with pandas, NumPy and charts; the Python judge tests your answers to exercises.</p>
   <div class="chips" id="labTabs" role="group" aria-label="Choose a lab"></div>
   <div id="labBox"></div>
 </section>
@@ -888,7 +890,10 @@ print(train, test)</pre>
 <script src="js/judge-data.js"></script>
 <script src="js/labs.js"></script>
 <script src="js/labs-more.js"></script>
+<script src="js/pyengine.js"></script>
+<script src="js/editor.js"></script>
 <script src="js/judge.js"></script>
+<script src="js/playground.js"></script>
 <script src="js/scenarios.js"></script>
 <script src="js/quiz-modes.js"></script>
 <script src="js/revise.js"></script>

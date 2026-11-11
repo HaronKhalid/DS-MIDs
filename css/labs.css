@@ -1,4 +1,4 @@
-/* Data Science additions: charts, labs, code judge */
+/* Data Science additions: charts and labs. The code editor and output panel are in code.css */
 .chartbox{margin:12px 0}
 svg.chart{width:100%;height:auto;display:block;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:12px}
 .legend{display:flex;flex-wrap:wrap;gap:14px;margin:6px 4px 0;font-size:.85rem;color:var(--muted)}
@@ -28,12 +28,11 @@ table.pd td:first-child{background:var(--brand-soft);font-weight:700}
 table.cl td.bad{background:var(--bad-soft);color:var(--bad);font-weight:700}
 table.cl tr.dupr td{background:var(--warn-soft)}
 
-/* python judge */
+/* python engine status line */
 .pystatus{font-size:.9rem;font-weight:600;padding:8px 12px;border-radius:10px;background:var(--bg);border:1px solid var(--line);margin:8px 0}
 .pystatus.ready{color:var(--ok);border-color:var(--ok)}
 .pystatus.error{color:var(--bad);border-color:var(--bad)}
 .pystatus.loading{color:var(--warn)}
-textarea.codeedit{font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:14px;line-height:1.55;white-space:pre;overflow:auto;tab-size:4;min-height:240px;background:var(--code);color:#e6e9ff;border-color:var(--code)}
 .numin{width:160px}
 .revtabs{margin-bottom:6px}
 .topic button.b.alt{margin-top:10px}

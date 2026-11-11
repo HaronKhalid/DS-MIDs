@@ -64,11 +64,11 @@ function labPandas(box){
   const draw=()=>{
     const op=PD_OPS.find(o=>o.k===cur),res=op.run();
     box.innerHTML=`<div class="card"><h3>Pandas explorer</h3>
-     <p>A small DataFrame <span class="code">df</span> of students. Pick an operation to see the pandas code and what it returns. <small class="muted">(The results are computed by the page to match what pandas prints; no pandas is running here.)</small></p>
+     <p>A small DataFrame <span class="code">df</span> of students. Pick an operation to see the pandas code and what it returns. <small class="muted">(The results are computed by the page to match what pandas prints. To run real pandas yourself, open the Python playground lab.)</small></p>
      <b>df</b>${pdTable(PD_COLS,pdRows(PD_STUDENTS,PD_COLS))}
      <b>cities</b> (second table, used by merge)${pdTable(["city","province"],pdRows(PD_CITIES,["city","province"]))}
      <div class="chips" role="group" aria-label="Pandas operation">${PD_OPS.map(o=>`<button class="chip ${o.k===cur?"on":""}" data-op="${o.k}" aria-pressed="${o.k===cur}">${o.label}</button>`).join("")}</div>
-     <pre class="code">import pandas as pd
+     <pre class="code py">import pandas as pd
 ${op.code}</pre>
      <div class="key">${esc(op.note)}</div><b>Result</b>${pdTable(res.cols,res.rows,res.index,res.indexName)}</div>`;
     $$("[data-op]",box).forEach(b=>b.onclick=()=>{cur=b.dataset.op;draw()});

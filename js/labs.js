@@ -1,4 +1,4 @@
-/* Interactive labs (calculators, simulators and graphs). More labs: labs-more.js. The Python judge: judge.js. */
+/* Interactive labs (calculators, simulators and graphs). More labs: labs-more.js. Python playground: playground.js. Python judge: judge.js. */
 const rngSeed=seed=>{let a=seed>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
 const gauss=r=>{let u=0,v=0;while(!u)u=r();v=r();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
 const sum=a=>a.reduce((x,y)=>x+y,0);
@@ -9,7 +9,8 @@ const numOr=(el,d)=>{const v=parseFloat(el.value);return isFinite(v)?v:d};
 /* ---------- lab registry ---------- */
 const LABS=[
  ["lifecycle","🔁","Lifecycle builder","W1",labLifecycle],
- ["judge","🐍","Python code judge","W2",b=>labJudge(b)], /* judge.js loads later, so look it up lazily */
+ ["play","▶️","Python playground","W2–W10",b=>labPlay(b)], /* playground.js and judge.js load later, so look them up lazily */
+ ["judge","🐍","Python code judge","W2",b=>labJudge(b)],
  ["scale","📏","Scaling & encoding","W4",b=>labScale(b)],
  ["clean","🧹","Data cleaning","W4",labClean],
  ["pandas","🐼","Pandas explorer","W5",b=>labPandas(b)],
